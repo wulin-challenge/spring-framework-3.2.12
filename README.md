@@ -12,8 +12,8 @@
 ### 安装所有spring-\* jars
 `./gradlew install`
 
-### 打入源文件到了你的eclipse  
-运行 `./import-into-eclipse.sh` 或者读 `import-into-idea.md` 以更适合的方式  
+### 导入源文件到了你的eclipse  
+运行 `./import-into-eclipse.sh` 或者认真读 `import-into-idea.md` 文档,以更适合的方式运行  
 
 请详细的内容请看下载源码后的spring framework自动的readme文档,然后手动将eclipse工程转为maven工程  
 
