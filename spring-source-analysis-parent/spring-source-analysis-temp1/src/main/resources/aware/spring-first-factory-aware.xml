@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:spring="http://www.springframework.org/schema/beans"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	     
+ 	<bean id="helloBean" name="helloBean" class="cn.wulin.temp1.domain.aware.HelloBean">
+ 		<spring:property name="name" value="helloword"/>
+ 	</bean>
+ 	
+ 	<bean id="firstBeanFactoryAware" name="firstBeanFactoryAware" class="cn.wulin.temp1.domain.aware.FirstBeanFactoryAware"></bean>
+</beans>

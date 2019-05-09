@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:spring="http://www.springframework.org/schema/beans"
+		xmlns:customize="http://wulin.cn/schema/customize"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://wulin.cn/schema/customize http://wulin.cn/schema/customize/customize.xsd">
+		
+		<customize:person age="28" id="person" name="wulin"></customize:person>
+       
+ 	
+</beans>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:spring="http://www.springframework.org/schema/beans"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+       
+ 	<bean id="aoDiCar" name="aoDiCar" class="cn.wulin.temp1.domain.custom_application.AoDiCar">
+ 		<spring:property name="name" value="新款奥迪A6"/>
+ 		<spring:property name="model" value="A系列"/>
+ 	</bean>
+</beans>

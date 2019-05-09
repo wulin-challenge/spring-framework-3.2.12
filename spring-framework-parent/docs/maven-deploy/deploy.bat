@@ -1,0 +1,1 @@
+mvn --settings F:\resources\temp\temp7\package-spring\settings.xml deploy:deploy-file -DgroupId=cn.wulin -DartifactId=spring-cglib-repack  -Dversion=3.1 -Dpackaging=jar -Dfile=spring-cglib-repack-3.1.jar  -Durl=http://wulin:81/nexus/content/repositories/thirdparty -DrepositoryId=thirdparty

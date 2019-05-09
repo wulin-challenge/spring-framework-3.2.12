@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:spring="http://www.springframework.org/schema/beans"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xsi:schemaLocation="
+		    http://www.springframework.org/schema/beans 
+		    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		    http://www.springframework.org/schema/aop 
+		    http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+       
+       <bean id="obtainBeanFactory" class="cn.wulin.temp1.domain.manual_create_bean.ObtainBeanFactory"/>
+       
+       <bean id="autoRole" class="cn.wulin.temp1.domain.manual_create_bean.AutoRole">
+	        <spring:property name="name" value="firstRole"/>
+	 		<spring:property name="createDate" >
+	 			<spring:value>2018-11-28</spring:value>
+	 		</spring:property>
+	 	</bean>
+	 	
+	 	<bean  class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+	 		<spring:property name="customEditors" >
+	 			<spring:map>
+	 				<spring:entry key="java.util.Date">
+	 					<bean class="cn.wulin.temp1.domain.properties.date.DatePropertyEditor">
+	 						<property name="format" value="yyyy-MM-dd"/>
+	 					</bean>
+	 				</spring:entry>
+	 			</spring:map>
+	 		</spring:property>
+	 	</bean>
+</beans>

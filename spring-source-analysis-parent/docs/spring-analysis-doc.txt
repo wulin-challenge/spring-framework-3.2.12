@@ -1,0 +1,8 @@
+
+1.gradle工具下载地址:http://www.gradle.org/downloads
+
+2.spring的源码地址:https://github.com/spring-projects
+
+3.spring的gradle格式的源码路径:
+
+4.将gradle源码转换为idea/eclipse的命令:gradle cleanidea eclipse

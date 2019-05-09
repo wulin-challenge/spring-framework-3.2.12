@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:spring="http://www.springframework.org/schema/beans"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+		   <list>
+		   	  <bean class="cn.wulin.temp1.domain.conversion_service.String2DateConverter"/>
+		   </list>
+		</property>
+	</bean>
+	
+	<bean id="person" class="cn.wulin.temp1.domain.conversion_service.Person">
+		<property name="name" value="wulin"/>
+		<property name="csrq" value="1990-01-17"/>
+	</bean>
+</beans>

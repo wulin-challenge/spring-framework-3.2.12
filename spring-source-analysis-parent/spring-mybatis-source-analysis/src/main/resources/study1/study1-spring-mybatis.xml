@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:spring="http://www.springframework.org/schema/beans"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xsi:schemaLocation="
+		    http://www.springframework.org/schema/beans 
+		    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		    http://www.springframework.org/schema/aop 
+		    http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+		    
+	   <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		     <property name="locations" value="classpath:study1/study1-spring-mybatis.properties"/>
+	   </bean>
+		    
+	   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="">
+		   <property name="driverClassName" value="${driver}" />
+		   <property name="url" value="${url}" />
+		   <property name="username" value="${username}" />
+		   <property name="password" value="${password}" />
+		   <!-- 连接池启动时的初始值 -->
+		   <property name="initialSize" value="1" />
+		   <!-- 连接池的最大值 -->
+		   <property name="maxActive" value="300" />
+		   <!-- 最大空闲值,当经过一个高峰时间后,连接池可以慢慢将已经用不到的连接慢慢释放一部分,一直减少到maxIdle为止 -->
+		   <property name="maxIdle" value="2" />
+		   <!-- 最大空闲值,当空闲的连接数少于阀值时,连接池就会预申请去一些连接,以免洪峰来时来不及申请 -->
+		   <property name="minIdle" value="1" />
+	   </bean>	
+	   
+	   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	   		<spring:property name="configLocation" value="classpath:study1/mybatis-config/study1-mybatis-config.xml"></spring:property>
+	   		<spring:property name="dataSource" ref="dataSource"></spring:property>
+	   </bean>    
+	   
+	   <!-- 
+	   <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	   		<spring:property name="mapperInterface" value="cn.wulin.spring.mybatis.study1.dao.UserMapper"></spring:property>
+	   		<spring:property name="sqlSessionFactory" ref="sqlSessionFactory"></spring:property>
+	   </bean>
+	    -->
+	    
+	    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	        <spring:property name="basePackage" value="cn.wulin.spring.mybatis.study1.dao"></spring:property>
+	        <spring:property name="processPropertyPlaceHolders" value="true"></spring:property>
+	    </bean>
+	    
+	   
+	   <!-- 配置业务bean:UserServiceBean -->
+	   
+	   <bean id="userService" class="cn.wulin.spring.mybatis.study1.service.UserService">
+	       <property name="sqlSessionFactory" ref="&amp;sqlSessionFactory"/>
+	   </bean>
+</beans>
