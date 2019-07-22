@@ -3,6 +3,7 @@
 .project
 .settings/
 .metadata/
+.recommenders/
 RemoteSystemsTempFiles/
 target/
 devenv
