@@ -13,5 +13,9 @@
   	<module>spring-instrument</module>
   	<module>spring-tx</module>
   	<module>spring-jdbc</module>
+  	<module>spring-oxm</module>
+  	<module>spring-web</module>
+  	<module>spring-webmvc</module>
+  	<module>spring-context-support</module>
   </modules>
 </project>
