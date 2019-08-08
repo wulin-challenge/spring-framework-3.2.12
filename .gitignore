@@ -6,6 +6,7 @@
 .recommenders/
 RemoteSystemsTempFiles/
 target/
+Servers/
 devenv
 *.log*
 *.iml

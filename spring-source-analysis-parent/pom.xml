@@ -9,5 +9,6 @@
   	<module>study-xml-xsd-dtd</module>
   	<module>spring-source-analysis-customize-label</module>
   	<module>spring-mybatis-source-analysis</module>
+  	<module>spring-source-analysis-springmvc</module>
   </modules>
 </project>
