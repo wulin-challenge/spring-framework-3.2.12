@@ -10,5 +10,8 @@
   	<module>spring-source-analysis-customize-label</module>
   	<module>spring-mybatis-source-analysis</module>
   	<module>spring-source-analysis-springmvc</module>
+  	<module>spring-source-analysis-servlet</module>
+  	<module>spring-source-analysis-security</module>
+  	<module>spring-source-analysis-security-oauth2</module>
   </modules>
 </project>

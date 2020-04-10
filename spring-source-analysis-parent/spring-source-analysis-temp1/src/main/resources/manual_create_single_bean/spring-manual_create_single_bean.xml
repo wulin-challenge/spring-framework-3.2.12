@@ -9,13 +9,7 @@
 		    http://www.springframework.org/schema/aop 
 		    http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
        
-   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-   		<property name="prefix" value="/WEB-INF/jsp/"></property>
-   		<property name="suffix" value=".jsp"></property>
-   </bean>
-   
-   <bean id="springSecurityFilterChain" class="cn.wulin.springmvc.filter.MyFilter"></bean>
-   
-    <!-- Spring中引入其他配置文件 -->
-<!--     <import resource="classpath:spring-servlet.xml" /> -->
+       <!-- 处理创建获取bean工厂的bean外,没有任何bean,spring容器中的bean都是自己手动创建的 -->
+       
+        <bean id="singleBeanFactory" class="cn.wulin.temp1.domain.manual_create_single_bean.SingleBeanFactory"></bean>
 </beans>

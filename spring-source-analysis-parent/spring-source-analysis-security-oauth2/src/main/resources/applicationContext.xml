@@ -14,7 +14,7 @@
    		<property name="suffix" value=".jsp"></property>
    </bean>
    
-   <bean id="springSecurityFilterChain" class="cn.wulin.springmvc.filter.MyFilter"></bean>
+<!--    <bean id="springSecurityFilterChain" class="cn.wulin.security.filter.MySecurityFilter"></bean> -->
    
     <!-- Spring中引入其他配置文件 -->
 <!--     <import resource="classpath:spring-servlet.xml" /> -->

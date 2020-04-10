@@ -1,4 +1,4 @@
-package cn.wulin.springmvc.controller;
+package cn.wulin.security.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
-import cn.wulin.springmvc.domain.User;
+import cn.wulin.security.domain.User;
 
 public class UserController extends AbstractController implements InitializingBean{
 
@@ -19,8 +19,8 @@ public class UserController extends AbstractController implements InitializingBe
 			throws Exception {
 		List<User> userList = new ArrayList<User>();
 		
-		userList.add(new User("张三", 27));
-		userList.add(new User("李四", 37));
+		userList.add(new User(1L,"张三", 27));
+		userList.add(new User(2L,"李四", 37));
 		
 		return new ModelAndView("userlist","users",userList);
 	}

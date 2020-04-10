@@ -9,13 +9,11 @@
 		    http://www.springframework.org/schema/aop 
 		    http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
        
-   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-   		<property name="prefix" value="/WEB-INF/jsp/"></property>
-   		<property name="suffix" value=".jsp"></property>
-   </bean>
-   
-   <bean id="springSecurityFilterChain" class="cn.wulin.springmvc.filter.MyFilter"></bean>
-   
-    <!-- Spring中引入其他配置文件 -->
-<!--     <import resource="classpath:spring-servlet.xml" /> -->
+       <bean id="manualInitBeanProcessor" class="cn.wulin.temp1.domain.manual_init_bean.ManualInitBeanProcessor"/>
+       
+       <bean id="menu" class="cn.wulin.temp1.domain.manual_init_bean.Menu">
+	        <spring:property name="name" value="菜单"/>
+	        <spring:property name="id" value="1"/>
+	        <spring:property name="code" value="menu_value"/>
+	 	</bean>
 </beans>
