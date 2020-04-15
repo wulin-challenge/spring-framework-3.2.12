@@ -30,12 +30,19 @@ import java.util.Map;
 /**
  * {@link PropertyAccessor} implementation that directly accesses instance fields.
  * Allows for direct binding to fields instead of going through JavaBean setters.
+ * 
+ * <p>直接访问实例字段的PropertyAccessor实现。 允许直接绑定到字段，而不是通过JavaBean setter。
  *
  * <p>This implementation just supports fields in the actual target object.
  * It is not able to traverse nested fields.
+ * 
+ * <p> 此实现仅支持实际目标对象中的字段。 它无法遍历嵌套字段。
  *
  * <p>A DirectFieldAccessor's default for the "extractOldValueForEditor" setting
  * is "true", since a field can always be read without side effects.
+ * 
+ * <p> DirectFieldAccessor的“extractOldValueForEditor”设置的默认值为“true”，
+ * 因为始终可以在没有副作用的情况下读取字段。
  *
  * @author Juergen Hoeller
  * @since 2.0
@@ -53,7 +60,11 @@ public class DirectFieldAccessor extends AbstractPropertyAccessor {
 
 	/**
 	 * Create a new DirectFieldAccessor for the given target object.
-	 * @param target the target object to access
+	 * 
+	 * <p> 为给定目标对象创建一个新的DirectFieldAccessor
+	 * 
+	 * @param target the target object to access - 要访问的目标对象
+	 * 
 	 */
 	public DirectFieldAccessor(final Object target) {
 		Assert.notNull(target, "Target object must not be null");

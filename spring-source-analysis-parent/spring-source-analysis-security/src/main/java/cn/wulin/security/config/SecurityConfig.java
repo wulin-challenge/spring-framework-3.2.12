@@ -28,7 +28,6 @@ import org.springframework.web.accept.ContentNegotiationStrategy;
 import org.springframework.web.accept.HeaderContentNegotiationStrategy;
 
 import cn.wulin.security.filter.MySecurityFilter;
-import cn.wulin.security.token.TokenConfiguration;
 import cn.wulin.security.token.authentication.CustomTokenAuthenticationFilter;
 import cn.wulin.security.token.authentication.CustomTokenRequestMatcher;
 import cn.wulin.security.token.authentication.CustomTokenSecurityConfig;
@@ -38,7 +37,6 @@ import cn.wulin.security.token.persistence.CustomTokenDelegateSecurityContextRep
 import cn.wulin.security.token.persistence.CustomTokenPersistenceRequestMatcher;
 
 @Configuration
-@Import({TokenConfiguration.class})
 @EnableWebSecurity(debug=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	

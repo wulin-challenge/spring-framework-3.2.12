@@ -48,10 +48,15 @@ import org.springframework.web.context.request.WebRequest;
  * Convenience methods for retrieving the root {@link WebApplicationContext} for
  * a given {@link ServletContext}. This is useful for programmatically accessing
  * a Spring application context from within custom web views or MVC actions.
+ * 
+ * <p> 用于检索给定ServletContext的根WebApplicationContext的便捷方法。 
+ * 这对于从自定义Web视图或MVC操作中以编程方式访问Spring应用程序上下文非常有用。
  *
  * <p>Note that there are more convenient ways of accessing the root context for
  * many web frameworks, either part of Spring or available as an external library.
  * This helper class is just the most generic way to access the root context.
+ * 
+ * <p> 请注意，有许多方便的方法可以访问许多Web框架的根上下文，无论是Spring的一部分还是外部库。 这个帮助器类只是访问根上下文的最通用方法。
  *
  * @author Juergen Hoeller
  * @see org.springframework.web.context.ContextLoader
@@ -69,11 +74,27 @@ public abstract class WebApplicationContextUtils {
 	/**
 	 * Find the root {@link WebApplicationContext} for this web app, typically
 	 * loaded via {@link org.springframework.web.context.ContextLoaderListener}.
+	 * 
+	 * <p> 查找此Web应用程序的根WebApplicationContext，通常通过
+	 * org.springframework.web.context.ContextLoaderListener加载。
+	 * 
 	 * <p>Will rethrow an exception that happened on root context startup,
 	 * to differentiate between a failed context startup and no context at all.
+	 * 
+	 * <p> 将重新抛出在根上下文启动时发生的异常，以区分失败的上下文启动和根本没有上下文。
+	 * 
 	 * @param sc ServletContext to find the web application context for
+	 * 
+	 * <p> ServletContext用于查找Web应用程序上下文
+	 * 
 	 * @return the root WebApplicationContext for this web app
+	 * 
+	 * <p> 此Web应用程序的根WebApplicationContext
+	 * 
 	 * @throws IllegalStateException if the root WebApplicationContext could not be found
+	 * 
+	 * <p> 如果找不到根WebApplicationContext
+	 * 
 	 * @see org.springframework.web.context.WebApplicationContext#ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE
 	 */
 	public static WebApplicationContext getRequiredWebApplicationContext(ServletContext sc) throws IllegalStateException {
@@ -87,10 +108,23 @@ public abstract class WebApplicationContextUtils {
 	/**
 	 * Find the root {@link WebApplicationContext} for this web app, typically
 	 * loaded via {@link org.springframework.web.context.ContextLoaderListener}.
+	 * 
+	 * <p> 查找此Web应用程序的根WebApplicationContext，通常通过
+	 * org.springframework.web.context.ContextLoaderListener加载。
+	 * 
 	 * <p>Will rethrow an exception that happened on root context startup,
 	 * to differentiate between a failed context startup and no context at all.
+	 * 
+	 * <p> 将重新抛出在根上下文启动时发生的异常，以区分失败的上下文启动和根本没有上下文。
+	 * 
 	 * @param sc ServletContext to find the web application context for
+	 * 
+	 * <p> ServletContext用于查找Web应用程序上下文
+	 * 
 	 * @return the root WebApplicationContext for this web app, or {@code null} if none
+	 * 
+	 * <p> 此Web应用程序的根WebApplicationContext，如果没有，则为null
+	 * 
 	 * @see org.springframework.web.context.WebApplicationContext#ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE
 	 */
 	public static WebApplicationContext getWebApplicationContext(ServletContext sc) {
@@ -99,9 +133,21 @@ public abstract class WebApplicationContextUtils {
 
 	/**
 	 * Find a custom {@link WebApplicationContext} for this web app.
+	 * 
+	 * <p> 查找此Web应用程序的自定义WebApplicationContext。
+	 * 
 	 * @param sc ServletContext to find the web application context for
+	 * 
+	 * <p> ServletContext用于查找Web应用程序上下文
+	 * 
 	 * @param attrName the name of the ServletContext attribute to look for
+	 * 
+	 * <p> 要查找的ServletContext属性的名称
+	 * 
 	 * @return the desired WebApplicationContext for this web app, or {@code null} if none
+	 * 
+	 * <p> 此Web应用程序所需的WebApplicationContext，如果没有，则为null
+	 * 
 	 */
 	public static WebApplicationContext getWebApplicationContext(ServletContext sc, String attrName) {
 		Assert.notNull(sc, "ServletContext must not be null");
@@ -235,17 +281,32 @@ public abstract class WebApplicationContextUtils {
 	 * Replace {@code Servlet}-based {@link StubPropertySource stub property sources} with
 	 * actual instances populated with the given {@code servletContext} and
 	 * {@code servletConfig} objects.
+	 * 
+	 * <p> 将基于Servlet的存根属性源替换为使用给定的servletContext和servletConfig对象填充的实际实例。
+	 * 
 	 * <p>This method is idempotent with respect to the fact it may be called any number
 	 * of times but will perform replacement of stub property sources with their
 	 * corresponding actual property sources once and only once.
+	 * 
+	 * <p> 该方法对于可以被调用任意次数的事实是幂等的，但是将用它们对应的实际属性源替换存根属性源一次且仅一次。
+	 * 
 	 * @param propertySources the {@link MutablePropertySources} to initialize (must not
 	 * be {@code null})
+	 * 
+	 * <p> 要初始化的{@link MutablePropertySources}(必须不为null)
+	 * 
 	 * @param servletContext the current {@link ServletContext} (ignored if {@code null}
 	 * or if the {@link StandardServletEnvironment#SERVLET_CONTEXT_PROPERTY_SOURCE_NAME
 	 * servlet context property source} has already been initialized)
+	 * 
+	 * <p> 当前的ServletContext（如果为null或者已经初始化了servlet上下文属性源，则忽略）
+	 * 
 	 * @param servletConfig the current {@link ServletConfig} (ignored if {@code null}
 	 * or if the {@link StandardServletEnvironment#SERVLET_CONFIG_PROPERTY_SOURCE_NAME
 	 * servlet config property source} has already been initialized)
+	 * 
+	 * <p> 当前的ServletConfig（如果为null或者servlet配置属性源已经初始化，则忽略） 
+	 * 
 	 * @see org.springframework.core.env.PropertySource.StubPropertySource
 	 * @see org.springframework.core.env.ConfigurableEnvironment#getPropertySources()
 	 */

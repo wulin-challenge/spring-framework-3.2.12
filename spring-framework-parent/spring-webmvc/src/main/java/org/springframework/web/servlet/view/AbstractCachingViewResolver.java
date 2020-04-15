@@ -181,12 +181,23 @@ public abstract class AbstractCachingViewResolver extends WebApplicationObjectSu
 
 	/**
 	 * Provides functionality to clear the cache for a certain view.
+	 * 
+	 * <p> 提供清除特定视图的缓存的功能。
+	 * 
 	 * <p>This can be handy in case developer are able to modify views
 	 * (e.g. Velocity templates) at runtime after which you'd need to
 	 * clear the cache for the specified view.
+	 * 
+	 * <p> 如果开发人员能够在运行时修改视图（例如Velocity模板），之后您需要清除指定视图的缓存，这可以很方便。
+	 * 
 	 * @param viewName the view name for which the cached view object
 	 * (if any) needs to be removed
+	 * 
+	 * <p> 需要删除缓存视图对象（如果有）的视图名称
+	 * 
 	 * @param locale the locale for which the view object should be removed
+	 * 
+	 * <p> 应删除视图对象的语言环境
 	 */
 	public void removeFromCache(String viewName, Locale locale) {
 		if (!isCache()) {
@@ -214,6 +225,8 @@ public abstract class AbstractCachingViewResolver extends WebApplicationObjectSu
 	/**
 	 * Clear the entire view cache, removing all cached view objects.
 	 * Subsequent resolve calls will lead to recreation of demanded view objects.
+	 * 
+	 * <p> 清除整个视图缓存，删除所有缓存的视图对象。 后续的解析调用将导致重新创建所需的视图对象。
 	 */
 	public void clearCache() {
 		logger.debug("Clearing entire view cache");
@@ -226,15 +239,27 @@ public abstract class AbstractCachingViewResolver extends WebApplicationObjectSu
 
 	/**
 	 * Create the actual View object.
+	 * 
+	 * <p> 创建实际的View对象。
+	 * 
 	 * <p>The default implementation delegates to {@link #loadView}.
 	 * This can be overridden to resolve certain view names in a special fashion,
 	 * before delegating to the actual {@code loadView} implementation
 	 * provided by the subclass.
-	 * @param viewName the name of the view to retrieve
-	 * @param locale the Locale to retrieve the view for
+	 * 
+	 * <p> 默认实现委托给loadView。 在委托子类提供的实际loadView实现之前，可以重写此方法以特殊方式解析某些视图名称。
+	 * 
+	 * @param viewName the name of the view to retrieve - 要检索的视图的名称
+	 * @param locale the Locale to retrieve the view for - 用于检索视图的Locale
 	 * @return the View instance, or {@code null} if not found
 	 * (optional, to allow for ViewResolver chaining)
+	 * 
+	 * <p> View实例，如果未找到则为null（可选，允许ViewResolver链接）
+	 * 
 	 * @throws Exception if the view couldn't be resolved
+	 * 
+	 * <p> 如果视图无法解决
+	 * 
 	 * @see #loadView
 	 */
 	protected View createView(String viewName, Locale locale) throws Exception {
@@ -245,13 +270,27 @@ public abstract class AbstractCachingViewResolver extends WebApplicationObjectSu
 	 * Subclasses must implement this method, building a View object
 	 * for the specified view. The returned View objects will be
 	 * cached by this ViewResolver base class.
+	 * 
+	 * <p> 子类必须实现此方法，为指定视图构建View对象。 返回的View对象将由此ViewResolver基类进行缓存。
+	 * 
 	 * <p>Subclasses are not forced to support internationalization:
 	 * A subclass that does not may simply ignore the locale parameter.
-	 * @param viewName the name of the view to retrieve
-	 * @param locale the Locale to retrieve the view for
+	 * 
+	 * <p> 子类不被强制支持国际化：不可以忽略locale参数的子类。
+	 * 
+	 * @param viewName the name of the view to retrieve - 要检索的视图的名称
+	 * 
+	 * @param locale the Locale to retrieve the view for - 用于检索视图的Locale
+	 * 
 	 * @return the View instance, or {@code null} if not found
 	 * (optional, to allow for ViewResolver chaining)
+	 * 
+	 * <p> View实例，如果未找到则为null（可选，允许ViewResolver链接）
+	 * 
 	 * @throws Exception if the view couldn't be resolved
+	 * 
+	 * <p> 如果视图无法解决
+	 * 
 	 * @see #resolveViewName
 	 */
 	protected abstract View loadView(String viewName, Locale locale) throws Exception;

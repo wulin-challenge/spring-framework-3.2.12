@@ -23,6 +23,8 @@ import org.springframework.aop.support.AbstractBeanFactoryPointcutAdvisor;
 /**
  * Advisor driven by a {@link CacheOperationSource}, used to include a
  * cache advice bean for methods that are cacheable.
+ * 
+ * <p> 由CacheOperationSource驱动的顾问程序，用于为可缓存的方法包括一个缓存建议bean。
  *
  * @author Costin Leau
  * @since 3.1

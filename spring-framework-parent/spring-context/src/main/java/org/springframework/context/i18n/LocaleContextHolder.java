@@ -26,12 +26,19 @@ import org.springframework.core.NamedThreadLocal;
  * with the current thread. The LocaleContext will be inherited
  * by any child threads spawned by the current thread if the
  * {@code inheritable} flag is set to {@code true}.
+ * 
+ * <p> 简单的holder类，它将LocaleContext实例与当前线程相关联。 如果可继承标志设置为true，
+ * 则LocaleContext将由当前线程生成的任何子线程继承。
  *
  * <p>Used as a central holder for the current Locale in Spring,
  * wherever necessary: for example, in MessageSourceAccessor.
  * DispatcherServlet automatically exposes its current Locale here.
  * Other applications can expose theirs too, to make classes like
  * MessageSourceAccessor automatically use that Locale.
+ * 
+ * <p> 在必要时用作Spring中当前Locale的中心持有者：例如，在MessageSourceAccessor中。 
+ * DispatcherServlet在此自动公开其当前的Locale。 其他应用程序也可以公开它们，
+ * 以使像MessageSourceAccessor这样的类自动使用该Locale。
  *
  * @author Juergen Hoeller
  * @since 1.2
@@ -50,6 +57,8 @@ public abstract class LocaleContextHolder {
 
 	/**
 	 * Reset the LocaleContext for the current thread.
+	 * 
+	 * <p> 重置当前线程的LocaleContext。
 	 */
 	public static void resetLocaleContext() {
 		localeContextHolder.remove();
@@ -59,8 +68,13 @@ public abstract class LocaleContextHolder {
 	/**
 	 * Associate the given LocaleContext with the current thread,
 	 * <i>not</i> exposing it as inheritable for child threads.
+	 * 
+	 * <p> 将给定的LocaleContext与当前线程相关联，而不是将其公开为子线程可继承。
+	 * 
 	 * @param localeContext the current LocaleContext,
 	 * or {@code null} to reset the thread-bound context
+	 * 
+	 * <p> 当前的LocaleContext，或null以重置线程绑定的上下文
 	 */
 	public static void setLocaleContext(LocaleContext localeContext) {
 		setLocaleContext(localeContext, false);
@@ -68,10 +82,18 @@ public abstract class LocaleContextHolder {
 
 	/**
 	 * Associate the given LocaleContext with the current thread.
+	 * 
+	 * <p> 将给定的LocaleContext与当前线程相关联。
+	 * 
 	 * @param localeContext the current LocaleContext,
 	 * or {@code null} to reset the thread-bound context
+	 * 
+	 * <p> 当前的LocaleContext，或null以重置线程绑定的上下文
+	 * 
 	 * @param inheritable whether to expose the LocaleContext as inheritable
 	 * for child threads (using an {@link InheritableThreadLocal})
+	 * 
+	 * <p> 是否将LocaleContext公开为子线程可继承（使用InheritableThreadLocal）
 	 */
 	public static void setLocaleContext(LocaleContext localeContext, boolean inheritable) {
 		if (localeContext == null) {
@@ -91,7 +113,13 @@ public abstract class LocaleContextHolder {
 
 	/**
 	 * Return the LocaleContext associated with the current thread, if any.
+	 * 
+	 * <p> 返回与当前线程关联的LocaleContext（如果有）。
+	 * 
 	 * @return the current LocaleContext, or {@code null} if none
+	 * 
+	 * <p> 当前的LocaleContext，如果没有，则返回null
+	 * 
 	 */
 	public static LocaleContext getLocaleContext() {
 		LocaleContext localeContext = localeContextHolder.get();

@@ -53,11 +53,22 @@ public class ContextExposingHttpServletRequest extends HttpServletRequestWrapper
 
 	/**
 	 * Create a new ContextExposingHttpServletRequest for the given request.
+	 * 
+	 * <p> 为给定的请求创建一个新的ContextExposingHttpServletRequest。
+	 * 
 	 * @param originalRequest the original HttpServletRequest
+	 * 
+	 * <p> 原来的HttpServletRequest
+	 * 
 	 * @param context the WebApplicationContext that this request runs in
+	 * 
+	 * <p> 此请求运行的WebApplicationContext
+	 * 
 	 * @param exposedContextBeanNames the names of beans in the context which
 	 * are supposed to be exposed (if this is non-null, only the beans in this
 	 * Set are eligible for exposure as attributes)
+	 * 
+	 * <p> 上下文中应该公开的bean的名称（如果这是非null，则只有此Set中的bean才有资格作为属性公开）
 	 */
 	public ContextExposingHttpServletRequest(
 			HttpServletRequest originalRequest, WebApplicationContext context, Set<String> exposedContextBeanNames) {
@@ -71,6 +82,8 @@ public class ContextExposingHttpServletRequest extends HttpServletRequestWrapper
 
 	/**
 	 * Return the WebApplicationContext that this request runs in.
+	 * 
+	 * <p> 返回此请求运行的WebApplicationContext。
 	 */
 	public final WebApplicationContext getWebApplicationContext() {
 		return this.webApplicationContext;

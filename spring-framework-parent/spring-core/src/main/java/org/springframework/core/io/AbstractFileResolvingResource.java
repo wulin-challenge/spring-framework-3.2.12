@@ -29,9 +29,13 @@ import org.springframework.util.ResourceUtils;
 /**
  * Abstract base class for resources which resolve URLs into File references,
  * such as {@link UrlResource} or {@link ClassPathResource}.
+ * 
+ * <p> 用于将URL解析为文件引用的资源的抽象基类，例如UrlResource或ClassPathResource。
  *
  * <p>Detects the "file" protocol as well as the JBoss "vfs" protocol in URLs,
  * resolving file system references accordingly.
+ * 
+ * <p> 检测URL中的“文件”协议以及JBoss“vfs”协议，相应地解析文件系统引用。
  *
  * @author Juergen Hoeller
  * @since 3.0
@@ -41,6 +45,9 @@ public abstract class AbstractFileResolvingResource extends AbstractResource {
 	/**
 	 * This implementation returns a File reference for the underlying class path
 	 * resource, provided that it refers to a file in the file system.
+	 * 
+	 * <p> 此实现返回基础类路径资源的File引用，前提是它引用文件系统中的文件。
+	 * 
 	 * @see org.springframework.util.ResourceUtils#getFile(java.net.URL, String)
 	 */
 	@Override
@@ -55,6 +62,8 @@ public abstract class AbstractFileResolvingResource extends AbstractResource {
 	/**
 	 * This implementation determines the underlying File
 	 * (or jar file, in case of a resource in a jar/zip).
+	 * 
+	 * <p> 此实现确定底层文件（或jar文件，如果是jar / zip中的资源）。
 	 */
 	@Override
 	protected File getFileForLastModifiedCheck() throws IOException {
@@ -74,6 +83,9 @@ public abstract class AbstractFileResolvingResource extends AbstractResource {
 	/**
 	 * This implementation returns a File reference for the underlying class path
 	 * resource, provided that it refers to a file in the file system.
+	 * 
+	 * <p> 此实现返回基础类路径资源的File引用，前提是它引用文件系统中的文件。
+	 * 
 	 * @see org.springframework.util.ResourceUtils#getFile(java.net.URI, String)
 	 */
 	protected File getFile(URI uri) throws IOException {
@@ -180,11 +192,18 @@ public abstract class AbstractFileResolvingResource extends AbstractResource {
 	/**
 	 * Customize the given {@link URLConnection}, obtained in the course of an
 	 * {@link #exists()}, {@link #contentLength()} or {@link #lastModified()} call.
+	 * 
+	 * <p> 自定义在exists（），contentLength（）或lastModified（）调用过程中获得的给定URLConnection。
+	 * 
 	 * <p>Calls {@link ResourceUtils#useCachesIfNecessary(URLConnection)} and
 	 * delegates to {@link #customizeConnection(HttpURLConnection)} if possible.
 	 * Can be overridden in subclasses.
-	 * @param con the URLConnection to customize
-	 * @throws IOException if thrown from URLConnection methods
+	 * 
+	 * <p> 如果可能，调用ResourceUtils.useCachesIfNecessary（URLConnection）
+	 * 并委托customizeConnection（HttpURLConnection）。 可以在子类中重写。
+	 * 
+	 * @param con the URLConnection to customize - 要自定义的URLConnection
+	 * @throws IOException if thrown from URLConnection methods - 如果从URLConnection方法中抛出异常
 	 */
 	protected void customizeConnection(URLConnection con) throws IOException {
 		ResourceUtils.useCachesIfNecessary(con);

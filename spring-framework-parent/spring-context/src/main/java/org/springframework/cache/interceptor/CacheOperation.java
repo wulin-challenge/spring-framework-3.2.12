@@ -24,6 +24,8 @@ import org.springframework.util.Assert;
 
 /**
  * Base class for cache operations.
+ * 
+ * <p> 缓存操作的基类。
  *
  * @author Costin Leau
  * @since 3.1
@@ -115,7 +117,12 @@ public abstract class CacheOperation {
 
 	/**
 	 * Return an identifying description for this caching operation.
+	 * 
+	 * <p> 返回此缓存操作的标识描述。
+	 * 
 	 * <p>Available to subclasses, for inclusion in their {@code toString()} result.
+	 * 
+	 * <p> 可用于子类，以包含在其toString（）结果中。
 	 */
 	protected StringBuilder getOperationDescription() {
 		StringBuilder result = new StringBuilder(getClass().getSimpleName());

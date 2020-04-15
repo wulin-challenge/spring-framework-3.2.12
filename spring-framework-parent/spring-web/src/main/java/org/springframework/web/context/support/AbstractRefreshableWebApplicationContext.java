@@ -39,22 +39,35 @@ import org.springframework.web.context.ServletContextAware;
  * interface for web environments. Provides a "configLocations" property,
  * to be populated through the ConfigurableWebApplicationContext interface
  * on web application startup.
+ * 
+ * <p> {@link org.springframework.context.support.AbstractRefreshableApplicationContext}子类，
+ * 为Web环境实现{@link org.springframework.web.context.ConfigurableWebApplicationContext}接口。 
+ * 提供“configLocations”属性，在Web应用程序启动时通过的ConfigurableWebApplicationContext接口填充。
  *
  * <p>This class is as easy to subclass as AbstractRefreshableApplicationContext:
  * All you need to implements is the {@link #loadBeanDefinitions} method;
  * see the superclass javadoc for details. Note that implementations are supposed
  * to load bean definitions from the files specified by the locations returned
  * by the {@link #getConfigLocations} method.
+ * 
+ * <p> 这个类与AbstractRefreshableApplicationContext一样容易子类化：您需要实现的是loadBeanDefinitions方法; 
+ * 有关详细信息，请参阅超类javadoc。 请注意，实现应该从getConfigLocations方法返回的位置指定的文件中加载bean定义。
  *
  * <p>Interprets resource paths as servlet context resources, i.e. as paths beneath
  * the web application root. Absolute paths, e.g. for files outside the web app root,
  * can be accessed via "file:" URLs, as implemented by
  * {@link org.springframework.core.io.DefaultResourceLoader}.
+ * 
+ * <p> 将资源路径解释为servlet上下文资源，即作为Web应用程序根目录下的路径。 绝对路径，例如 对于Web应用程序根目录之外的文件，
+ * 可以通过“file：”URL访问，由org.springframework.core.io.DefaultResourceLoader实现。
  *
  * <p>In addition to the special beans detected by
  * {@link org.springframework.context.support.AbstractApplicationContext},
  * this class detects a bean of type {@link org.springframework.ui.context.ThemeSource}
  * in the context, under the special bean name "themeSource".
+ * 
+ * <p> 除了org.springframework.context.support.AbstractApplicationContext检测到的特殊bean之外，
+ * 此类还在上下文中的特殊bean名称“themeSource”下检测org.springframework.ui.context.ThemeSource类型的bean。
  *
  * <p><b>This is the web context to be subclassed for a different bean definition format.</b>
  * Such a context implementation can be specified as "contextClass" context-param
@@ -62,12 +75,21 @@ import org.springframework.web.context.ServletContextAware;
  * init-param for {@link org.springframework.web.servlet.FrameworkServlet},
  * replacing the default {@link XmlWebApplicationContext}. It will then automatically
  * receive the "contextConfigLocation" context-param or init-param, respectively.
+ * 
+ * <p> 这是要为不同的bean定义格式进行子类化的Web上下文。 这样的上下文实现可以指定为
+ * org.springframework.web.context.ContextLoader的“contextClass”context-param或
+ * org.springframework.web.servlet.FrameworkServlet的“contextClass”init-param，
+ * 替换默认的XmlWebApplicationContext。 然后它将分别自动接收“contextConfigLocation”context-param或init-param。
  *
  * <p>Note that WebApplicationContext implementations are generally supposed
  * to configure themselves based on the configuration received through the
  * {@link ConfigurableWebApplicationContext} interface. In contrast, a standalone
  * application context might allow for configuration in custom startup code
  * (for example, {@link org.springframework.context.support.GenericApplicationContext}).
+ * 
+ * <p> 请注意，WebApplicationContext实现通常应根据通过ConfigurableWebApplicationContext接口接收的配置
+ * 进行自我配置。 相反，独立的应用程序上下文可能允许在自定义启动代码中进行配置（例如，
+ * org.springframework.context.support.GenericApplicationContext）。
  *
  * @author Juergen Hoeller
  * @since 1.1.3

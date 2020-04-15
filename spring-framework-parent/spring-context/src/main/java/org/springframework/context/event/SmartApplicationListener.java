@@ -23,6 +23,8 @@ import org.springframework.core.Ordered;
 /**
  * Extended variant of the standard {@link ApplicationListener} interface,
  * exposing further metadata such as the supported event type.
+ * 
+ * <p> 标准ApplicationListener接口的扩展变体，公开更多元数据，例如支持的事件类型。
  *
  * @author Juergen Hoeller
  * @since 3.0
@@ -31,11 +33,15 @@ public interface SmartApplicationListener extends ApplicationListener<Applicatio
 
 	/**
 	 * Determine whether this listener actually supports the given event type.
+	 * 
+	 * <p> 确定此侦听器是否实际支持给定的事件类型。
 	 */
 	boolean supportsEventType(Class<? extends ApplicationEvent> eventType);
 
 	/**
 	 * Determine whether this listener actually supports the given source type.
+	 * 
+	 * <p> 确定此侦听器是否实际支持给定的源类型。
 	 */
 	boolean supportsSourceType(Class<?> sourceType);
 

@@ -25,6 +25,8 @@ import java.util.Map;
  * Generic interface for a web request. Mainly intended for generic web
  * request interceptors, giving them access to general request metadata,
  * not for actual handling of the request.
+ * 
+ * <p> Web请求的通用接口。 主要用于通用Web请求拦截器，使其可以访问一般请求元数据，而不是实际处理请求。
  *
  * @author Juergen Hoeller
  * @since 2.0
@@ -127,9 +129,18 @@ public interface WebRequest extends RequestAttributes {
 	/**
 	 * Check whether the request qualifies as not modified given the
 	 * supplied last-modified timestamp (as determined by the application).
+	 * 
+	 * <p> 根据提供的上次修改时间戳（由应用程序确定），检查请求是否符合未修改的条件。
+	 * 
 	 * <p>This will also transparently set the appropriate response headers,
 	 * for both the modified case and the not-modified case.
+	 * 
+	 * <p> 对于修改后的案例和未修改的案例，这也将透明地设置适当的响应头。
+	 * 
 	 * <p>Typical usage:
+	 * 
+	 * <p> 典型用法：
+	 * 
 	 * <pre class="code">
 	 * public String myHandleMethod(WebRequest webRequest, Model model) {
 	 *   long lastModified = // application-specific calculation
@@ -144,14 +155,25 @@ public interface WebRequest extends RequestAttributes {
 	 * <p><strong>Note:</strong> that you typically want to use either
 	 * this {@code #checkNotModified(long)} method; or
 	 * {@link #checkNotModified(String)}, but not both.
+	 * 
+	 * <p> 注意：您通常要使用此#checkNotModified（long）方法; 或checkNotModified（String），但不是两者。
+	 * 
 	 * <p>If the "If-Modified-Since" header is set but cannot be parsed
 	 * to a date value, this method will ignore the header and proceed
 	 * with setting the last-modified timestamp on the response.
+	 * 
+	 * <p> 如果设置了“If-Modified-Since”标头但无法解析为日期值，则此方法将忽略标头并继续在响应上设置上次修改的时间戳。
+	 * 
 	 * @param lastModifiedTimestamp the last-modified timestamp that
 	 * the application determined for the underlying resource
+	 * 
+	 * <p> 应用程序为底层资源确定的最后修改时间戳
+	 * 
 	 * @return whether the request qualifies as not modified,
 	 * allowing to abort request processing and relying on the response
 	 * telling the client that the content has not been modified
+	 * 
+	 * <p> 请求是否符合未修改的条件，允许中止请求处理并依赖响应，告知客户端内容未被修改
 	 */
 	boolean checkNotModified(long lastModifiedTimestamp);
 

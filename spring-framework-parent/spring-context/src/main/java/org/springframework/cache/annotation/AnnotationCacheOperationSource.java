@@ -32,11 +32,16 @@ import org.springframework.util.Assert;
 /**
  * Implementation of the {@link org.springframework.cache.interceptor.CacheOperationSource
  * CacheOperationSource} interface for working with caching metadata in annotation format.
+ * 
+ * <p> CacheOperationSource接口的实现，用于处理注解格式的元数据。
  *
  * <p>This class reads Spring's {@link Cacheable}, {@link CachePut} and {@link CacheEvict}
  * annotations and exposes corresponding caching operation definition to Spring's cache
  * infrastructure. This class may also serve as base class for a custom
  * {@code CacheOperationSource}.
+ * 
+ * <p> 此类读取Spring的Cacheable，CachePut和CacheEvict批注，并将相应的缓存操作定义公开给Spring的缓存基础结构。 
+ * 此类也可以用作自定义CacheOperationSource的基类。
  *
  * @author Costin Leau
  * @author Juergen Hoeller
@@ -117,13 +122,24 @@ public class AnnotationCacheOperationSource extends AbstractFallbackCacheOperati
 
 	/**
 	 * Determine the cache operation(s) for the given method or class.
+	 * 
+	 * <p> 确定给定方法或类的缓存操作。
+	 * 
 	 * <p>This implementation delegates to configured
 	 * {@link CacheAnnotationParser}s for parsing known annotations into
 	 * Spring's metadata attribute class.
+	 * 
+	 * <p> 该实现委托配置的CacheAnnotationParsers，用于将已知的注释解析为Spring的元数据属性类。
+	 * 
 	 * <p>Can be overridden to support custom annotations that carry
 	 * caching metadata.
-	 * @param ae the annotated method or class
+	 * 
+	 * <p> 可以重写以支持带有缓存元数据的自定义注释。
+	 * 
+	 * @param ae the annotated method or class - 带注解的方法或类
 	 * @return the configured caching operations, or {@code null} if none found
+	 * 
+	 * <p> 配置的缓存操作；如果找不到，则为null
 	 */
 	protected Collection<CacheOperation> determineCacheOperations(AnnotatedElement ae) {
 		Collection<CacheOperation> ops = null;
@@ -141,6 +157,8 @@ public class AnnotationCacheOperationSource extends AbstractFallbackCacheOperati
 
 	/**
 	 * By default, only public methods can be made cacheable.
+	 * 
+	 * <p> 默认情况下，只能使公共方法可缓存。
 	 */
 	@Override
 	protected boolean allowPublicMethodsOnly() {

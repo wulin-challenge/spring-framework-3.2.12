@@ -19,9 +19,13 @@ package org.springframework.web.context.request;
 /**
  * Extension of the {@link WebRequest} interface, exposing the
  * native request and response objects in a generic fashion.
+ * 
+ * <p> 扩展WebRequest接口，以通用方式公开本机请求和响应对象。
  *
  * <p>Mainly intended for framework-internal usage,
  * in particular for generic argument resolution code.
+ * 
+ * <p> 主要用于框架内部使用，特别是用于通用参数解析代码。
  *
  * @author Juergen Hoeller
  * @since 2.5.2

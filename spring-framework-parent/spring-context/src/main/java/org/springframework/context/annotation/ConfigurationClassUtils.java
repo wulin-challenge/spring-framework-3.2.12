@@ -51,9 +51,17 @@ abstract class ConfigurationClassUtils {
 	/**
 	 * Check whether the given bean definition is a candidate for a configuration class,
 	 * and mark it accordingly.
+	 * 
+	 * <p> 检查给定的bean定义是否适合配置类，并进行相应标记。
+	 * 
 	 * @param beanDef the bean definition to check
 	 * @param metadataReaderFactory the current factory in use by the caller
+	 * 
+	 * <p> 呼叫者正在使用的当前工厂
+	 * 
 	 * @return whether the candidate qualifies as (any kind of) configuration class
+	 * 
+	 * <p> 候选人是否符合（任何一种）配置类别的资格
 	 */
 	public static boolean checkConfigurationClassCandidate(BeanDefinition beanDef, MetadataReaderFactory metadataReaderFactory) {
 		AnnotationMetadata metadata = null;
@@ -107,9 +115,17 @@ abstract class ConfigurationClassUtils {
 	/**
 	 * Check the given metadata for a full configuration class candidate
 	 * (i.e. a class annotated with {@code @Configuration}).
+	 * 
+	 * <p> 检查给定的元数据以获取完整的配置类候选对象（即以@Configuration注释的类）。
+	 * 
 	 * @param metadata the metadata of the annotated class
+	 * 
+	 * <p> 带注释的类的元数据
+	 * 
 	 * @return {@code true} if the given class is to be processed as a full
 	 * configuration class, including cross-method call interception
+	 * 
+	 * <p> 如果将给定的类作为完整的配置类处理，包括跨方法调用拦截，则为true
 	 */
 	public static boolean isFullConfigurationCandidate(AnnotationMetadata metadata) {
 		return metadata.isAnnotated(Configuration.class.getName());

@@ -59,11 +59,18 @@ import org.springframework.web.util.WebUtils;
  * query parameters (assuming they've not been used as URI template variables),
  * but this behavior can be changed by overriding the
  * {@link #isEligibleProperty(String, Object)} method.
+ * 
+ * <p> 查看重定向到绝对，上下文相关或当前请求相对URL。 URL可以是URI模板，在这种情况下，URI模板变量将替换为模型中可用的值。
+ * 默认情况下，所有原始模型属性（或其集合）都作为HTTP查询参数公开（假设它们未被用作URI模板变量），
+ * 但可以通过重写isEligibleProperty（String，Object）方法来更改此行为。
  *
  * <p>A URL for this view is supposed to be a HTTP redirect URL, i.e.
  * suitable for HttpServletResponse's {@code sendRedirect} method, which
  * is what actually does the redirect if the HTTP 1.0 flag is on, or via sending
  * back an HTTP 303 code - if the HTTP 1.0 compatibility flag is off.
+ * 
+ * <p> 此视图的URL应该是HTTP重定向URL，即适用于HttpServletResponse的sendRedirect方法，
+ * 如果HTTP 1.0标志打开，则实际执行重定向，或者通过发回HTTP 303代码 - 如果HTTP 1.0兼容性国旗已关闭。
  *
  * <p>Note that while the default value for the "contextRelative" flag is off,
  * you will probably want to almost always set it to true. With the flag off,
@@ -72,9 +79,15 @@ import org.springframework.web.util.WebUtils;
  * Since most web applications will never know or care what their context path
  * actually is, they are much better off setting this flag to true, and submitting
  * paths which are to be considered relative to the web application root.
+ * 
+ * <p> 请注意，虽然“contextRelative”标志的默认值为off，但您可能希望几乎始终将其设置为true。关闭标志后，
+ * 以“/”开头的URL被认为是相对于Web服务器根目录，而当标志打开时，它们被认为是相对于Web应用程序根目录。
+ * 由于大多数Web应用程序永远不会知道或关心它们的上下文路径实际是什么，因此将它们设置为true并提交相对于Web应用程序根目录的路径更好。
  *
  * <p><b>NOTE when using this redirect view in a Portlet environment:</b> Make sure
  * that your controller respects the Portlet {@code sendRedirect} constraints.
+ * 
+ * <p> 注意在Portlet环境中使用此重定向视图时：确保您的控制器遵守Portlet sendRedirect约束。
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -138,10 +151,18 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 
 	/**
 	 * Create a new RedirectView with the given URL.
-	 * @param url the URL to redirect to
+	 * 
+	 * <p> 使用给定的URL创建一个新的RedirectView。
+	 * 
+	 * @param url the URL to redirect to - 要重定向到的URL
 	 * @param contextRelative whether to interpret the given URL as
 	 * relative to the current ServletContext
+	 * 
+	 * <p> 是否将给定的URL解释为相对于当前的ServletContext
+	 * 
 	 * @param http10Compatible whether to stay compatible with HTTP 1.0 clients
+	 * 
+	 * <p> 是否与HTTP 1.0客户端保持兼容
 	 */
 	public RedirectView(String url, boolean contextRelative, boolean http10Compatible) {
 		super(url);

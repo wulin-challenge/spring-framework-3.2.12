@@ -24,6 +24,11 @@
         </init-param>
     </servlet>
 
+	<!-- 
+	注意: 下面的<url-pattern>/</url-pattern>与<url-pattern>/*</url-pattern>这两配置是不一样的,
+	更加详细见文章: http://47.96.173.67:55555/notes/article/article_preview_index?id=325
+	
+	 -->
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>/</url-pattern>
@@ -31,13 +36,16 @@
    
 	<!-- 
 	     配置上下文载入器,上下文载入器载入除DispatherServlet载入的配置文件之外的其他上下文配置文件
-	  最常用的上下文载入器是一个Servlet监听器,器名称为ContextLoaderListener
+	  最常用的上下文载入器是一个Servlet监听器,器名称为ContextLoaderListener,它将启动spring的上下文  
 	 -->
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     
+    <!-- 
+    spring mvc的Filter的执行都是由它委托的,它spring mvc中所有filter的起点
+     -->
     <filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

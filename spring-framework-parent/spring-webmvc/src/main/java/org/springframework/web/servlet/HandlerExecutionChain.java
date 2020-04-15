@@ -30,7 +30,9 @@ import org.springframework.util.CollectionUtils;
 /**
  * Handler execution chain, consisting of handler object and any handler interceptors.
  * Returned by HandlerMapping's {@link HandlerMapping#getHandler} method.
- *
+ * 
+ * <p> 处理程序执行链，由处理程序对象和任何处理程序拦截器组成。 由HandlerMapping的HandlerMapping.getHandler方法返回。
+ * 
  * @author Juergen Hoeller
  * @since 20.06.2003
  * @see HandlerInterceptor
@@ -50,7 +52,13 @@ public class HandlerExecutionChain {
 
 	/**
 	 * Create a new HandlerExecutionChain.
+	 * 
+	 * <p> 创建一个新的HandlerExecutionChain。
+	 * 
 	 * @param handler the handler object to execute
+	 * 
+	 * <p> 要执行的处理程序对象
+	 * 
 	 */
 	public HandlerExecutionChain(Object handler) {
 		this(handler, null);
@@ -58,9 +66,17 @@ public class HandlerExecutionChain {
 
 	/**
 	 * Create a new HandlerExecutionChain.
+	 * 
+	 * <p> 创建一个新的HandlerExecutionChain。
+	 * 
 	 * @param handler the handler object to execute
+	 * 
+	 * <p> 要执行的处理程序对象
+	 * 
 	 * @param interceptors the array of interceptors to apply
 	 * (in the given order) before the handler itself executes
+	 * 
+	 * <p> 要在处理程序本身执行之前应用（按给定顺序）的拦截器数组
 	 */
 	public HandlerExecutionChain(Object handler, HandlerInterceptor[] interceptors) {
 		if (handler instanceof HandlerExecutionChain) {
@@ -77,7 +93,7 @@ public class HandlerExecutionChain {
 	}
 
 	/**
-	 * Return the handler object to execute.
+	 * Return the handler object to execute. - 返回处理程序对象以执行。
 	 * @return the handler object
 	 */
 	public Object getHandler() {
@@ -108,7 +124,12 @@ public class HandlerExecutionChain {
 
 	/**
 	 * Return the array of interceptors to apply (in the given order).
+	 * 
+	 * <p> 返回要应用的拦截器数组（按给定顺序）。
+	 * 
 	 * @return the array of HandlerInterceptors instances (may be {@code null})
+	 * 
+	 * <p> HandlerInterceptors实例的数组（可能为null）
 	 */
 	public HandlerInterceptor[] getInterceptors() {
 		if (this.interceptors == null && this.interceptorList != null) {
@@ -119,9 +140,15 @@ public class HandlerExecutionChain {
 
 	/**
 	 * Apply preHandle methods of registered interceptors.
+	 * 
+	 * <p> 应用注册拦截器的preHandle方法。
+	 * 
 	 * @return {@code true} if the execution chain should proceed with the
 	 * next interceptor or the handler itself. Else, DispatcherServlet assumes
 	 * that this interceptor has already dealt with the response itself.
+	 * 
+	 * <p> 如果执行链应继续执行下一个拦截器或处理程序本身，则为true。 否则，
+	 * DispatcherServlet假定这个拦截器已经处理了响应本身。
 	 */
 	boolean applyPreHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (getInterceptors() != null) {
@@ -139,6 +166,8 @@ public class HandlerExecutionChain {
 
 	/**
 	 * Apply postHandle methods of registered interceptors.
+	 * 
+	 * <p> 应用注册拦截器的postHandle方法。
 	 */
 	void applyPostHandle(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) throws Exception {
 		if (getInterceptors() == null) {
@@ -154,6 +183,9 @@ public class HandlerExecutionChain {
 	 * Trigger afterCompletion callbacks on the mapped HandlerInterceptors.
 	 * Will just invoke afterCompletion for all interceptors whose preHandle invocation
 	 * has successfully completed and returned true.
+	 * 
+	 * <p> 在映射的HandlerInterceptors上触发afterCompletion回调。
+	 *  只需为preHandle调用成功完成并返回true的所有拦截器调用afterCompletion。
 	 */
 	void triggerAfterCompletion(HttpServletRequest request, HttpServletResponse response, Exception ex)
 			throws Exception {
@@ -174,6 +206,8 @@ public class HandlerExecutionChain {
 
 	/**
 	 * Apply afterConcurrentHandlerStarted callback on mapped AsyncHandlerInterceptors.
+	 * 
+	 * <p> 在映射的AsyncHandlerInterceptors上应用afterConcurrentHandlerStarted回调。
 	 */
 	void applyAfterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response) {
 		if (getInterceptors() == null) {

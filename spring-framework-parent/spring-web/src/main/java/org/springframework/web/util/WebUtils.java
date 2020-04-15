@@ -41,6 +41,8 @@ import org.springframework.util.StringUtils;
  * Miscellaneous utilities for web applications.
  * Used by various framework classes.
  *
+ * <p> Web应用程序的其他实用程序。 由各种框架类使用。
+ * 
  * @author Rod Johnson
  * @author Juergen Hoeller
  */
@@ -48,8 +50,13 @@ public abstract class WebUtils {
 
 	/**
 	 * Standard Servlet 2.3+ spec request attributes for include URI and paths.
+	 * 
+	 * <p> 包含URI和路径的标准Servlet 2.3+规范请求属性。
+	 * 
 	 * <p>If included via a RequestDispatcher, the current resource will see the
 	 * originating request. Its own URI and paths are exposed as request attributes.
+	 * 
+	 * <p> 如果通过RequestDispatcher包含，则当前资源将看到原始请求。 它自己的URI和路径作为请求属性公开。
 	 */
 	public static final String INCLUDE_REQUEST_URI_ATTRIBUTE = "javax.servlet.include.request_uri";
 	public static final String INCLUDE_CONTEXT_PATH_ATTRIBUTE = "javax.servlet.include.context_path";
@@ -59,8 +66,13 @@ public abstract class WebUtils {
 
 	/**
 	 * Standard Servlet 2.4+ spec request attributes for forward URI and paths.
+	 * 
+	 * <p> 转发URI和路径的标准Servlet 2.4+规范请求属性。
+	 * 
 	 * <p>If forwarded to via a RequestDispatcher, the current resource will see its
 	 * own URI and paths. The originating URI and paths are exposed as request attributes.
+	 * 
+	 * <p> 如果通过RequestDispatcher转发，则当前资源将看到自己的URI和路径。 原始URI和路径作为请求属性公开。
 	 */
 	public static final String FORWARD_REQUEST_URI_ATTRIBUTE = "javax.servlet.forward.request_uri";
 	public static final String FORWARD_CONTEXT_PATH_ATTRIBUTE = "javax.servlet.forward.context_path";
@@ -70,9 +82,14 @@ public abstract class WebUtils {
 
 	/**
 	 * Standard Servlet 2.3+ spec request attributes for error pages.
+	 * 
+	 * <p> 错误页面的标准Servlet 2.3+规范请求属性。
+	 * 
 	 * <p>To be exposed to JSPs that are marked as error pages, when forwarding
 	 * to them directly rather than through the servlet container's error page
 	 * resolution mechanism.
+	 * 
+	 * <p> 要被暴露给标记为错误页面的JSP，直接转发给它们而不是通过servlet容器的错误页面解析机制。
 	 */
 	public static final String ERROR_STATUS_CODE_ATTRIBUTE = "javax.servlet.error.status_code";
 	public static final String ERROR_EXCEPTION_TYPE_ATTRIBUTE = "javax.servlet.error.exception_type";
@@ -84,12 +101,17 @@ public abstract class WebUtils {
 
 	/**
 	 * Prefix of the charset clause in a content type String: ";charset="
+	 * 
+	 * <p> 内容类型字符串中charset子句的前缀：“; charset =”
 	 */
 	public static final String CONTENT_TYPE_CHARSET_PREFIX = ";charset=";
 
 	/**
 	 * Default character encoding to use when {@code request.getCharacterEncoding}
 	 * returns {@code null}, according to the Servlet spec.
+	 * 
+	 * <p> 根据Servlet规范，当request.getCharacterEncoding返回null时使用的默认字符编码。
+	 * 
 	 * @see ServletRequest#getCharacterEncoding
 	 */
 	public static final String DEFAULT_CHARACTER_ENCODING = "ISO-8859-1";
@@ -344,20 +366,41 @@ public abstract class WebUtils {
 	/**
 	 * Return the best available mutex for the given session:
 	 * that is, an object to synchronize on for the given session.
+	 * 
+	 * <p> 返回给定会话的最佳可用互斥锁：即，为给定会话同步的对象。
+	 * 
 	 * <p>Returns the session mutex attribute if available; usually,
 	 * this means that the HttpSessionMutexListener needs to be defined
 	 * in {@code web.xml}. Falls back to the HttpSession itself
 	 * if no mutex attribute found.
+	 * 
+	 * <p> 返回会话互斥锁属性（如果可用）; 通常，这意味着需要在web.xml中定义HttpSessionMutexListener。 
+	 * 如果没有找到互斥锁属性，则回退到HttpSession本身。
+	 * 
 	 * <p>The session mutex is guaranteed to be the same object during
 	 * the entire lifetime of the session, available under the key defined
 	 * by the {@code SESSION_MUTEX_ATTRIBUTE} constant. It serves as a
 	 * safe reference to synchronize on for locking on the current session.
+	 * 
+	 * <p> 会话互斥锁在会话的整个生命周期内保证是相同的对象，在SESSION_MUTEX_ATTRIBUTE常量定义的密钥下可用。 
+	 * 它用作同步锁定当前会话的安全引用。
+	 * 
 	 * <p>In many cases, the HttpSession reference itself is a safe mutex
 	 * as well, since it will always be the same object reference for the
 	 * same active logical session. However, this is not guaranteed across
 	 * different servlet containers; the only 100% safe way is a session mutex.
+	 * 
+	 * <p> 在许多情况下，HttpSession引用本身也是一个安全的互斥锁，因为它始终是同一个活动逻辑会话的相同对象引用。 
+	 * 但是，不能在不同的servlet容器中保证这一点; 唯一100％安全的方式是会话互斥。
+	 * 
 	 * @param session the HttpSession to find a mutex for
+	 * 
+	 * <p> HttpSession找到一个互斥锁
+	 * 
 	 * @return the mutex object (never {@code null})
+	 * 
+	 * <p> 互斥对象（永不为null）
+	 * 
 	 * @see #SESSION_MUTEX_ATTRIBUTE
 	 * @see HttpSessionMutexListener
 	 */
@@ -416,11 +459,17 @@ public abstract class WebUtils {
 	/**
 	 * Determine whether the given request is an include request,
 	 * that is, not a top-level HTTP request coming in from the outside.
+	 * 
+	 * <p> 确定给定请求是否为包含请求，即不是从外部进入的顶级HTTP请求。
+	 * 
 	 * <p>Checks the presence of the "javax.servlet.include.request_uri"
 	 * request attribute. Could check any request attribute that is only
 	 * present in an include request.
-	 * @param request current servlet request
-	 * @return whether the given request is an include request
+	 * 
+	 * <p> 检查是否存在“javax.servlet.include.request_uri”请求属性。 可以检查仅包含在包含请求中的任何请求属性。
+	 * 
+	 * @param request current servlet request - 当前的servlet请求
+	 * @return whether the given request is an include request - 给定请求是否为包含请求
 	 */
 	public static boolean isIncludeRequest(ServletRequest request) {
 		return (request.getAttribute(INCLUDE_REQUEST_URI_ATTRIBUTE) != null);
@@ -435,9 +484,20 @@ public abstract class WebUtils {
 	 * {@code javax.servlet.forward.servlet_path},
 	 * {@code javax.servlet.forward.path_info},
 	 * {@code javax.servlet.forward.query_string}.
+	 * 
+	 * <p> 将当前请求URI和路径公开为Servlet 2.4规范中定义的键下的javax.servlet.http.HttpServletRequest属性，
+	 * 用于实现2.3或更早版本的Servlet API的容器：
+	 * {@code javax.servlet.forward.request_uri},
+	 * {@code javax.servlet.forward.context_path},
+	 * {@code javax.servlet.forward.servlet_path},
+	 * {@code javax.servlet.forward.path_info},
+	 * {@code javax.servlet.forward.query_string}.
+	 * 
 	 * <p>Does not override values if already present, to not cause conflicts
 	 * with the attributes exposed by Servlet 2.4+ containers themselves.
 	 * @param request current servlet request
+	 * 
+	 * <p> 如果已经存在，则不覆盖值，以免与Servlet 2.4+容器本身公开的属性发生冲突。
 	 */
 	public static void exposeForwardRequestAttributes(HttpServletRequest request) {
 		exposeRequestAttributeIfNotPresent(request, FORWARD_REQUEST_URI_ATTRIBUTE, request.getRequestURI());

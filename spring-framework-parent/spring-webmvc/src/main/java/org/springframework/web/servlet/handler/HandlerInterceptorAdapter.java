@@ -25,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * Abstract adapter class for the HandlerInterceptor interface,
  * for simplified implementation of pre-only/post-only interceptors.
+ * 
+ * <p> HandlerInterceptor接口的抽象适配器类，用于简化pre-only / post-only拦截器的实现。
  *
  * @author Juergen Hoeller
  * @since 05.12.2003
@@ -33,6 +35,8 @@ public abstract class HandlerInterceptorAdapter implements AsyncHandlerIntercept
 
 	/**
 	 * This implementation always returns {@code true}.
+	 * 
+	 * <p> 此实现始终返回true。
 	 */
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 		throws Exception {
@@ -41,6 +45,8 @@ public abstract class HandlerInterceptorAdapter implements AsyncHandlerIntercept
 
 	/**
 	 * This implementation is empty.
+	 * 
+	 * <p> 此实现为空。
 	 */
 	public void postHandle(
 			HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
@@ -49,6 +55,8 @@ public abstract class HandlerInterceptorAdapter implements AsyncHandlerIntercept
 
 	/**
 	 * This implementation is empty.
+	 * 
+	 * <p> 此实现为空。
 	 */
 	public void afterCompletion(
 			HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
@@ -57,6 +65,8 @@ public abstract class HandlerInterceptorAdapter implements AsyncHandlerIntercept
 
 	/**
 	 * This implementation is empty.
+	 * 
+	 * <p> 此实现为空。
 	 */
 	public void afterConcurrentHandlingStarted(
 			HttpServletRequest request, HttpServletResponse response, Object handler)

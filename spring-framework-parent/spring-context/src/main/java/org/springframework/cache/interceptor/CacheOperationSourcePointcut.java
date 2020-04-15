@@ -26,6 +26,8 @@ import org.springframework.util.ObjectUtils;
 /**
  * A Pointcut that matches if the underlying {@link CacheOperationSource}
  * has an attribute for a given method.
+ * 
+ * <p> 如果基础CacheOperationSource具有给定方法的属性，则该Pointcut匹配。
  *
  * @author Costin Leau
  * @since 3.1

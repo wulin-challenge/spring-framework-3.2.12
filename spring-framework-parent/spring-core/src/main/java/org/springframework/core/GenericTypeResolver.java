@@ -32,9 +32,13 @@ import org.springframework.util.ConcurrentReferenceHashMap;
 
 /**
  * Helper class for resolving generic types against type variables.
+ * 
+ * <p> 用于根据类型变量解析泛型的Helper类。
  *
  * <p>Mainly intended for usage within the framework, resolving method
  * parameter types even when they are declared generically.
+ * 
+ * <p> 主要用于框架中，可解析方法参数类型，即使它们是通用声明的。
  *
  * @author Juergen Hoeller
  * @author Rob Harrop

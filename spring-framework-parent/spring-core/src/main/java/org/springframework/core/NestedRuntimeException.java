@@ -93,9 +93,18 @@ public abstract class NestedRuntimeException extends RuntimeException {
 	/**
 	 * Retrieve the most specific cause of this exception, that is,
 	 * either the innermost cause (root cause) or this exception itself.
+	 * 
+	 * <p> 检索此异常的最具体原因，即最内部的原因（根本原因）或此异常本身。
+	 * 
 	 * <p>Differs from {@link #getRootCause()} in that it falls back
 	 * to the present exception if there is no root cause.
+	 * 
+	 * <p> 与getRootCause（）的不同之处在于，如果没有根本原因，它将回退到当前异常。
+	 * 
 	 * @return the most specific cause (never {@code null})
+	 * 
+	 * <p> 最具体的原因（绝不为null）
+	 * 
 	 * @since 2.0.3
 	 */
 	public Throwable getMostSpecificCause() {

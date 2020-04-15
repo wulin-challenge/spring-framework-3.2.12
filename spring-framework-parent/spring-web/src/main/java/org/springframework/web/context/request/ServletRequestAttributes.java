@@ -27,9 +27,13 @@ import org.springframework.web.util.WebUtils;
 
 /**
  * Servlet-based implementation of the {@link RequestAttributes} interface.
+ * 
+ * <p> 基于Servlet的RequestAttributes接口实现。
  *
  * <p>Accesses objects from servlet request and HTTP session scope,
  * with no distinction between "session" and "global session".
+ * 
+ * <p> 从servlet请求和HTTP会话范围访问对象，不区分“会话”和“全局会话”。
  *
  * @author Juergen Hoeller
  * @since 2.0
@@ -41,6 +45,8 @@ public class ServletRequestAttributes extends AbstractRequestAttributes {
 	/**
 	 * Constant identifying the {@link String} prefixed to the name of a
 	 * destruction callback when it is stored in a {@link HttpSession}.
+	 * 
+	 * <p> 当存储在HttpSession中时，常量标识前缀为销毁回调名称的字符串。
 	 */
 	public static final String DESTRUCTION_CALLBACK_NAME_PREFIX =
 			ServletRequestAttributes.class.getName() + ".DESTRUCTION_CALLBACK.";
@@ -55,6 +61,9 @@ public class ServletRequestAttributes extends AbstractRequestAttributes {
 
 	/**
 	 * Create a new ServletRequestAttributes instance for the given request.
+	 * 
+	 * <p> 为给定的请求创建一个新的ServletRequestAttributes实例。
+	 * 
 	 * @param request current HTTP request
 	 */
 	public ServletRequestAttributes(HttpServletRequest request) {
@@ -65,6 +74,8 @@ public class ServletRequestAttributes extends AbstractRequestAttributes {
 
 	/**
 	 * Exposes the native {@link HttpServletRequest} that we're wrapping.
+	 * 
+	 * <p> 暴露我们正在包装的本机HttpServletRequest。
 	 */
 	public final HttpServletRequest getRequest() {
 		return this.request;

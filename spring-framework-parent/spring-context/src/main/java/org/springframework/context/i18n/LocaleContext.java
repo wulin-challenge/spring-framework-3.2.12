@@ -20,9 +20,13 @@ import java.util.Locale;
 
 /**
  * Strategy interface for determining the current Locale.
+ * 
+ * <p> 用于确定当前Locale的策略接口。
  *
  * <p>A LocaleContext instance can be associated with a thread
  * via the LocaleContextHolder class.
+ * 
+ * <p> LocaleContext实例可以通过LocaleContextHolder类与线程相关联。
  *
  * @author Juergen Hoeller
  * @since 1.2
@@ -34,6 +38,8 @@ public interface LocaleContext {
 	/**
 	 * Return the current Locale, which can be fixed or determined dynamically,
 	 * depending on the implementation strategy.
+	 * 
+	 * <p> 返回当前的Locale，可以根据实现策略动态修复或确定。
 	 */
 	Locale getLocale();
 

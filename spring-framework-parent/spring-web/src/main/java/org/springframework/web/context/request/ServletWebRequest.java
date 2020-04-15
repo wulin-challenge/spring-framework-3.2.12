@@ -32,6 +32,8 @@ import org.springframework.web.util.WebUtils;
 
 /**
  * {@link WebRequest} adapter for an {@link javax.servlet.http.HttpServletRequest}.
+ * 
+ * <p> 用于javax.servlet.http.HttpServletRequest的WebRequest适配器。
  *
  * @author Juergen Hoeller
  * @since 2.0
@@ -58,6 +60,9 @@ public class ServletWebRequest extends ServletRequestAttributes implements Nativ
 
 	/**
 	 * Create a new ServletWebRequest instance for the given request.
+	 * 
+	 * <p> 为给定的请求创建一个新的ServletWebRequest实例。
+	 * 
 	 * @param request current HTTP request
 	 */
 	public ServletWebRequest(HttpServletRequest request) {
@@ -66,8 +71,13 @@ public class ServletWebRequest extends ServletRequestAttributes implements Nativ
 
 	/**
 	 * Create a new ServletWebRequest instance for the given request/response pair.
+	 * 
+	 * <p> 为给定的请求/响应对创建新的ServletWebRequest实例。
+	 * 
 	 * @param request current HTTP request
 	 * @param response current HTTP response (for automatic last-modified handling)
+	 * 
+	 * <p> 当前HTTP响应（用于自动最后修改处理）
 	 */
 	public ServletWebRequest(HttpServletRequest request, HttpServletResponse response) {
 		this(request);
@@ -77,6 +87,8 @@ public class ServletWebRequest extends ServletRequestAttributes implements Nativ
 
 	/**
 	 * Exposes the native {@link HttpServletResponse} that we're wrapping (if any).
+	 * 
+	 * <p> 公开我们正在包装的本机HttpServletResponse（如果有的话）。
 	 */
 	public final HttpServletResponse getResponse() {
 		return this.response;
@@ -163,6 +175,7 @@ public class ServletWebRequest extends ServletRequestAttributes implements Nativ
 			catch (IllegalArgumentException ex) {
 				String headerValue = getRequest().getHeader(HEADER_IF_MODIFIED_SINCE);
 				// Possibly an IE 10 style value: "Wed, 09 Apr 2014 09:57:42 GMT; length=13774"
+				// 可能是IE 10风格的价值：“Wed，09 Apr 2014 09:57:42 GMT; length = 13774”
 				int separatorIndex = headerValue.indexOf(';');
 				if (separatorIndex != -1) {
 					String datePart = headerValue.substring(0, separatorIndex);
@@ -171,6 +184,7 @@ public class ServletWebRequest extends ServletRequestAttributes implements Nativ
 					}
 					catch (IllegalArgumentException ex2) {
 						// Giving up
+						// 放弃
 					}
 				}
 			}

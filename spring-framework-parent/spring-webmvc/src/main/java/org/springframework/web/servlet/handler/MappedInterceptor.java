@@ -23,6 +23,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 /**
  * Holds information about a HandlerInterceptor mapped to a path into the application.
  * Provides a method to match a request path to the mapped path patterns.
+ * 
+ * <p> 保存有关映射到应用程序路径的HandlerInterceptor的信息。 提供将请求路径与映射路径模式匹配的方法。
  *
  * @author Keith Donald
  * @author Rossen Stoyanchev
@@ -86,6 +88,8 @@ public final class MappedInterceptor {
 
 	/**
 	 * The actual Interceptor reference.
+	 * 
+	 * <p> 实际的Interceptor引用。
 	 */
 	public HandlerInterceptor getInterceptor() {
 		return this.interceptor;
@@ -93,8 +97,13 @@ public final class MappedInterceptor {
 
 	/**
 	 * Returns {@code true} if the interceptor applies to the given request path.
+	 * 
+	 * <p> 如果拦截器应用于给定的请求路径，则返回true。
+	 * 
 	 * @param lookupPath the current request path
 	 * @param pathMatcher a path matcher for path pattern matching
+	 * 
+	 * <p> 路径模式匹配的路径匹配器
 	 */
 	public boolean matches(String lookupPath, PathMatcher pathMatcher) {
 		if (this.excludePatterns != null) {

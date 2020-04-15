@@ -35,9 +35,13 @@ import org.springframework.web.servlet.ThemeResolver;
 /**
  * Utility class for easy access to request-specific state which has been
  * set by the {@link org.springframework.web.servlet.DispatcherServlet}.
+ * 
+ * <p> 用于轻松访问由org.springframework.web.servlet.DispatcherServlet设置的特定于请求的状态的实用程序类。
  *
  * <p>Supports lookup of current WebApplicationContext, LocaleResolver,
  * Locale, ThemeResolver, Theme, and MultipartResolver.
+ * 
+ * <p> 支持查找当前的WebApplicationContext，LocaleResolver，Locale，ThemeResolver，Theme和MultipartResolver。
  *
  * @author Juergen Hoeller
  * @author Rossen Stoyanchev
@@ -66,12 +70,21 @@ public abstract class RequestContextUtils {
 	 * was found associated with the current request. This method is useful to
 	 * allow components outside the framework, such as JSP tag handlers,
 	 * to access the most specific application context available.
+	 * 
+	 * <p> 查找与已启动请求处理的DispatcherServlet关联的WebApplicationContext，如果未找到与当前请求关联的全局上下文，
+	 * 则查找全局上下文。 此方法可用于允许框架外部的组件（如JSP标记处理程序）访问可用的最具体的应用程序上下文。
+	 * 
 	 * @param request current HTTP request
 	 * @param servletContext current servlet context
 	 * @return the request-specific WebApplicationContext, or the global one
 	 * if no request-specific context has been found
+	 * 
+	 * <p> 特定于请求的WebApplicationContext，如果未找到特定于请求的上下文，则为全局的WebApplicationContext
+	 * 
 	 * @throws IllegalStateException if neither a servlet-specific nor a
 	 * global context has been found
+	 * 
+	 * <p> 如果既没有找到特定于servlet的也没有找到全局上下文
 	 */
 	public static WebApplicationContext getWebApplicationContext(
 			ServletRequest request, ServletContext servletContext) throws IllegalStateException {
@@ -90,8 +103,14 @@ public abstract class RequestContextUtils {
 	/**
 	 * Return the LocaleResolver that has been bound to the request by the
 	 * DispatcherServlet.
+	 * 
+	 * <p> 返回已由DispatcherServlet绑定到请求的LocaleResolver。
+	 * 
 	 * @param request current HTTP request
 	 * @return the current LocaleResolver, or {@code null} if not found
+	 * 
+	 * <p> 当前的LocaleResolver，如果未找到则为null
+	 * 
 	 */
 	public static LocaleResolver getLocaleResolver(HttpServletRequest request) {
 		return (LocaleResolver) request.getAttribute(DispatcherServlet.LOCALE_RESOLVER_ATTRIBUTE);
@@ -101,9 +120,16 @@ public abstract class RequestContextUtils {
 	 * Retrieves the current locale from the given request,
 	 * using the LocaleResolver bound to the request by the DispatcherServlet
 	 * (if available), falling back to the request's accept-header Locale.
+	 * 
+	 * <p> 使用由DispatcherServlet（如果可用）绑定到请求的LocaleResolver，从给定请求中检索当前语言环境，
+	 * 并返回到请求的accept-header Locale。
+	 * 
 	 * @param request current HTTP request
 	 * @return the current locale, either from the LocaleResolver or from
 	 * the plain request
+	 * 
+	 * <p> 当前语言环境，可以是LocaleResolver，也可以是普通请求
+	 * 
 	 * @see #getLocaleResolver
 	 * @see javax.servlet.http.HttpServletRequest#getLocale()
 	 */

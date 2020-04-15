@@ -25,11 +25,17 @@ import org.springframework.context.ConfigurableApplicationContext;
  * Interface to be implemented by configurable web application contexts.
  * Supported by {@link ContextLoader} and
  * {@link org.springframework.web.servlet.FrameworkServlet}.
+ * 
+ * <p> 通过配置web应用上下文实现此接口,通过{@link ContextLoader}和
+ * {@link org.springframework.web.servlet.FrameworkServlet}支持
  *
  * <p>Note: The setters of this interface need to be called before an
  * invocation of the {@link #refresh} method inherited from
  * {@link org.springframework.context.ConfigurableApplicationContext}.
  * They do not cause an initialization of the context on their own.
+ * 
+ * <p> 注意：在调用从org.springframework.context.ConfigurableApplicationContext
+ * 继承的refresh方法之前，需要调用此接口的setter。 它们不会导致自己初始化上下文。
  *
  * @author Juergen Hoeller
  * @since 05.12.2003
@@ -41,11 +47,16 @@ public interface ConfigurableWebApplicationContext extends WebApplicationContext
 
 	/**
 	 * Prefix for ApplicationContext ids that refer to context path and/or servlet name.
+	 * 
+	 * <p> ApplicationContext id的前缀，用于引用上下文路径和/或servlet名称。
 	 */
 	String APPLICATION_CONTEXT_ID_PREFIX = WebApplicationContext.class.getName() + ":";
 
 	/**
 	 * Name of the ServletConfig environment bean in the factory.
+	 * 
+	 * <p> 在工厂中的 ServletConfig 环境的名称
+	 * 
 	 * @see javax.servlet.ServletConfig
 	 */
 	String SERVLET_CONFIG_BEAN_NAME = "servletConfig";
@@ -86,8 +97,14 @@ public interface ConfigurableWebApplicationContext extends WebApplicationContext
 	/**
 	 * Set the config locations for this web application context in init-param style,
 	 * i.e. with distinct locations separated by commas, semicolons or whitespace.
+	 * 
+	 * <p> 以init-param样式设置此Web应用程序上下文的配置位置，即使用逗号，分号或空格分隔的不同位置。
+	 * 
 	 * <p>If not set, the implementation is supposed to use a default for the
 	 * given namespace or the root web application context, as appropriate.
+	 * 
+	 * <p> 如果未设置，则实现应该根据需要使用给定命名空间或根Web应用程序上下文的缺省值。
+	 * 
 	 */
 	void setConfigLocation(String configLocation);
 

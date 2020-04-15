@@ -27,6 +27,9 @@ import org.springframework.web.servlet.ModelAndView;
  * instances just like a {@code HttpServlet} but is able to
  * participate in an MVC workflow. Controllers are comparable to the
  * notion of a Struts {@code Action}.
+ * 
+ * <p> 基本控制器接口，表示接收HttpServletRequest和HttpServletResponse实例的组件，
+ * 就像HttpServlet一样，但能够参与MVC工作流。控制器与Struts Action的概念相当。
  *
  * <p>Any implementation of the Controller interface should be a
  * <i>reusable, thread-safe</i> class, capable of handling multiple
@@ -34,8 +37,13 @@ import org.springframework.web.servlet.ModelAndView;
  * configure a Controller easily, Controller implementations are encouraged
  * to be (and usually are) JavaBeans.
  * </p>
- *
+ * 
+ * <p> Controller接口的任何实现都应该是可重用的，线程安全的类，能够在应用程序的整个生命周期中处理多个HTTP请求。
+ * 为了能够轻松配置Controller，鼓励Controller实现（通常是）JavaBeans。
+ * 
  * <p><b><a name="workflow">Workflow</a></b></p>
+ * 
+ * <p> 工作流程
  *
  * <p>
  * After a <cde>DispatcherServlet</code> has received a request and has
@@ -51,14 +59,23 @@ import org.springframework.web.servlet.ModelAndView;
  * So actually, this method is the main entrypoint for the
  * {@link org.springframework.web.servlet.DispatcherServlet DispatcherServlet}
  * which delegates requests to controllers.</p>
+ * 
+ * <p> 在DispatcherServlet收到请求并完成其工作以解析区域设置，主题等之后，它会尝试使用HandlerMapping解析Controller。
+ * 当找到Controller来处理请求时，将调用所定位的Controller的handleRequest方法;然后，定位的Controller负责处理实际请求，
+ * 并且 - 如果适用 - 返回适当的ModelAndView。实际上，此方法是DispatcherServlet的主要入口点，它将请求委托给控制器。
  *
  * <p>So basically any <i>direct</i> implementation of the Controller interface
  * just handles HttpServletRequests and should return a ModelAndView, to be further
  * interpreted by the DispatcherServlet. Any additional functionality such as
  * optional validation, form handling, etc should be obtained through extending
  * one of the abstract controller classes mentioned above.</p>
+ * 
+ * <p> 所以基本上任何Controller接口的直接实现都只处理HttpServletRequests，并且应该返回一个ModelAndView，
+ * 由DispatcherServlet进一步解释。任何其他功能，如可选验证，表单处理等，都应该通过扩展上面提到的一个抽象控制器类来获得。
  *
  * <p><b>Notes on design and testing</b></p>
+ * 
+ * <p> 设计和测试说明
  *
  * <p>The Controller interface is explicitly designed to operate on HttpServletRequest
  * and HttpServletResponse objects, just like an HttpServlet. It does not aim to
@@ -66,6 +83,10 @@ import org.springframework.web.servlet.ModelAndView;
  * Instead, the full power of the Servlet API is available, allowing Controllers to be
  * general-purpose: a Controller is able to not only handle web user interface
  * requests but also to process remoting protocols or to generate reports on demand.</p>
+ * 
+ * <p> Controller接口明确设计为在HttpServletRequest和HttpServletResponse对象上运行，就像HttpServlet一样。
+ * 与Weblet，JSF或Tapestry相比，它的目的不是将自己与Servlet API分离。相反，Servlet API的全部功能可用，
+ * 允许控制器具有通用性：Controller不仅能够处理Web用户界面请求，还能处理远程协议或按需生成报告。
  *
  * <p>Controllers can easily be tested by passing in mock objects for the
  * HttpServletRequest and HttpServletResponse objects as parameters to the
@@ -75,10 +96,18 @@ import org.springframework.web.servlet.ModelAndView;
  * suitable for testing Spring web controllers. In contrast to a Struts Action,
  * there is no need to mock the ActionServlet or any other infrastructure;
  * HttpServletRequest and HttpServletResponse are sufficient.</p>
+ * 
+ * <p> 通过将HttpServletRequest和HttpServletResponse对象的模拟对象作为参数传递给handleRequest方法，
+ * 可以轻松地测试控制器。为方便起见，Spring附带了一组Servlet API模拟，适用于测试任何类型的Web组件，
+ * 但特别适合测试Spring Web控制器。与Struts Action相比，不需要模拟ActionServlet或任何其他基础结构; 
+ * HttpServletRequest和HttpServletResponse就足够了。
  *
  * <p>If Controllers need to be aware of specific environment references, they can
  * choose to implement specific awareness interfaces, just like any other bean in a
  * Spring (web) application context can do, for example:</p>
+ * 
+ * <p> 如果控制器需要知道特定的环境引用，他们可以选择实现特定的感知接口，就像Spring（web）应用程序上下文中的任何其他bean一样，例如：
+ * 
  * <ul>
  * <li>{@code org.springframework.context.ApplicationContextAware}</li>
  * <li>{@code org.springframework.context.ResourceLoaderAware}</li>
@@ -92,8 +121,14 @@ import org.springframework.web.servlet.ModelAndView;
  * Alternatively, derive from the WebApplicationObjectSupport base class, which gives
  * you all those references through convenient accessors - but requires an
  * ApplicationContext reference on initialization.
+ * 
+ * <p> 通过相应感知界面中定义的相应设置器，可以在测试环境中容易地传递这样的环境引用。 通常，建议尽可能减少依赖关系：
+ * 例如，如果您只需要资源加载，请仅实现ResourceLoaderAware。 或者，从WebApplicationObjectSupport基类派生，
+ * 它通过方便的访问器为您提供所有这些引用 - 但在初始化时需要ApplicationContext引用。
  *
  * <p>Controllers can optionally implement the {@link LastModified} interface.
+ * 
+ * <p> 控制器可以选择实现LastModified接口。
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -114,9 +149,16 @@ public interface Controller {
 	 * will render. A {@code null} return value is not an error: It indicates that
 	 * this object completed request processing itself, thus there is no ModelAndView
 	 * to render.
+	 * 
+	 * <p> 处理请求并返回DispatcherServlet将呈现的ModelAndView对象。 null返回值不是错误：它表示此对象已完成请求处理本身，
+	 * 因此没有要呈现的ModelAndView。
+	 * 
 	 * @param request current HTTP request
 	 * @param response current HTTP response
 	 * @return a ModelAndView to render, or {@code null} if handled directly
+	 * 
+	 * <p> 要呈现的ModelAndView，如果直接处理则为null
+	 * 
 	 * @throws Exception in case of errors
 	 */
 	ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception;

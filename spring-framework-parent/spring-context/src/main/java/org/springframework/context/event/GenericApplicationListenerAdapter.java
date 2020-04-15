@@ -26,6 +26,8 @@ import org.springframework.util.Assert;
 /**
  * {@link SmartApplicationListener} adapter that determines supported event types
  * through introspecting the generically declared type of the target listener.
+ * 
+ * <p> SmartApplicationListener适配器，通过内省一般声明的目标侦听器类型来确定支持的事件类型。
  *
  * @author Juergen Hoeller
  * @since 3.0
@@ -38,7 +40,10 @@ public class GenericApplicationListenerAdapter implements SmartApplicationListen
 
 	/**
 	 * Create a new GenericApplicationListener for the given delegate.
-	 * @param delegate the delegate listener to be invoked
+	 * 
+	 * <p> 为给定的委托创建一个新的GenericApplicationListener。
+	 * 
+	 * @param delegate the delegate listener to be invoked - 要调用的委托侦听器
 	 */
 	public GenericApplicationListenerAdapter(ApplicationListener delegate) {
 		Assert.notNull(delegate, "Delegate listener must not be null");

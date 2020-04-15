@@ -33,6 +33,8 @@ import org.springframework.util.Assert;
  * Helper class that encapsulates the specification of a method parameter, i.e.
  * a Method or Constructor plus a parameter index and a nested type index for
  * a declared generic type. Useful as a specification object to pass along.
+ * 
+ * <p> Helper类，它封装了方法参数的规范，即Method或Constructor加上参数索引和声明的泛型类型的嵌套类型索引。 可用作传递的规范对象。
  *
  * @author Juergen Hoeller
  * @author Rob Harrop

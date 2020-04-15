@@ -25,6 +25,8 @@ import org.springframework.util.Assert;
  * Abstract support class for RequestAttributes implementations,
  * offering a request completion mechanism for request-specific destruction
  * callbacks and for updating accessed session attributes.
+ * 
+ * <p> RequestAttributes实现的抽象支持类，为特定于请求的销毁回调和更新访问的会话属性提供请求完成机制。
  *
  * @author Juergen Hoeller
  * @since 2.0
@@ -33,6 +35,7 @@ import org.springframework.util.Assert;
 public abstract class AbstractRequestAttributes implements RequestAttributes {
 
 	/** Map from attribute name String to destruction callback Runnable */
+	/** 从属性名称String映射到销毁回调Runnable */
 	protected final Map<String, Runnable> requestDestructionCallbacks = new LinkedHashMap<String, Runnable>(8);
 
 	private volatile boolean requestActive = true;
@@ -40,8 +43,13 @@ public abstract class AbstractRequestAttributes implements RequestAttributes {
 
 	/**
 	 * Signal that the request has been completed.
+	 * 
+	 * <p> 发出请求已完成的信号。
+	 * 
 	 * <p>Executes all request destruction callbacks and updates the
 	 * session attributes that have been accessed during request processing.
+	 * 
+	 * <p> 执行所有请求销毁回调并更新在请求处理期间访问过的会话属性。
 	 */
 	public void requestCompleted() {
 		executeRequestDestructionCallbacks();
@@ -51,6 +59,9 @@ public abstract class AbstractRequestAttributes implements RequestAttributes {
 
 	/**
 	 * Determine whether the original request is still active.
+	 * 
+	 * <p> 确定原始请求是否仍处于活动状态。
+	 * 
 	 * @see #requestCompleted()
 	 */
 	protected final boolean isRequestActive() {
@@ -59,8 +70,16 @@ public abstract class AbstractRequestAttributes implements RequestAttributes {
 
 	/**
 	 * Register the given callback as to be executed after request completion.
+	 * 
+	 * <p> 注册给定的回调，以便在请求完成后执行。
+	 * 
 	 * @param name the name of the attribute to register the callback for
+	 * 
+	 * <p> 注册回调的属性的名称
+	 * 
 	 * @param callback the callback to be executed for destruction
+	 * 
+	 * <p> 要执行的回调以进行销毁
 	 */
 	protected final void registerRequestDestructionCallback(String name, Runnable callback) {
 		Assert.notNull(name, "Name must not be null");

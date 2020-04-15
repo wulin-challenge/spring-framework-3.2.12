@@ -22,20 +22,30 @@ import java.util.Map;
 /**
  * Assertion utility class that assists in validating arguments.
  * Useful for identifying programmer errors early and clearly at runtime.
+ * 
+ * <p> 断言实用程序类，它有助于验证参数。 用于在运行时尽早清楚地识别程序员错误。
  *
  * <p>For example, if the contract of a public method states it does not
  * allow {@code null} arguments, Assert can be used to validate that
  * contract. Doing this clearly indicates a contract violation when it
  * occurs and protects the class's invariants.
+ * 
+ * <p> 例如，如果公共方法的契约声明它不允许空参数，则可以使用Assert来验证该契约。 
+ * 这样做可以清楚地表明合同违规发生并保护班级的不变量。
  *
  * <p>Typically used to validate method arguments rather than configuration
  * properties, to check for cases that are usually programmer errors rather than
  * configuration errors. In contrast to config initialization code, there is
  * usally no point in falling back to defaults in such methods.
+ * 
+ * <p> 通常用于验证方法参数而不是配置属性，以检查通常是程序员错误而非配置错误的情况。 与配置初始化代码相比，
+ * 在这种方法中回退到默认值通常没有意义。
  *
  * <p>This class is similar to JUnit's assertion library. If an argument value is
  * deemed invalid, an {@link IllegalArgumentException} is thrown (typically).
  * For example:
+ * 
+ * <p> 该类与JUnit的断言库类似。 如果参数值被视为无效，则抛出IllegalArgumentException（通常）。 例如
  *
  * <pre class="code">
  * Assert.notNull(clazz, "The class must not be null");
@@ -43,6 +53,8 @@ import java.util.Map;
  *
  * Mainly for internal use within the framework; consider Jakarta's Commons Lang
  * >= 2.0 for a more comprehensive suite of assertion utilities.
+ * 
+ * <p> 主要供框架内部使用; 考虑雅加达的Commons Lang> = 2.0，以获得更全面的断言实用程序套件。
  *
  * @author Keith Donald
  * @author Juergen Hoeller

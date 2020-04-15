@@ -124,6 +124,9 @@ public class JstlView extends InternalResourceView {
 
 	/**
 	 * Exposes a JSTL LocalizationContext for Spring's locale and MessageSource.
+	 * 
+	 * <p> 公开Spring的语言环境和MessageSource的JSTL LocalizationContext。
+	 * 
 	 * @see JstlUtils#exposeLocalizationContext
 	 */
 	@Override

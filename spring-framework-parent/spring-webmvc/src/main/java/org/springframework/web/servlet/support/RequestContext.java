@@ -127,13 +127,26 @@ public class RequestContext {
 	}
 
 	/**
-	 * Create a new RequestContext for the given request, using the request attributes for Errors retrieval. <p>This
-	 * only works with InternalResourceViews, as Errors instances are part of the model and not normally exposed as
-	 * request attributes. It will typically be used within JSPs or custom tags. <p>If a ServletContext is specified,
-	 * the RequestContext will also work with the root WebApplicationContext (outside a DispatcherServlet).
+	 * Create a new RequestContext for the given request, using the request attributes for Errors retrieval. 
+	 * 
+	 * <p> 使用错误检索的请求属性为给定请求创建新的RequestContext。
+	 * 
+	 * <p>This only works with InternalResourceViews, as Errors instances are part of the model and 
+	 * not normally exposed as request attributes. It will typically be used within JSPs or custom tags. 
+	 * 
+	 * <p> 这仅适用于InternalResourceViews，因为Errors实例是模型的一部分，通常不作为请求属性公开。 它通常用于JSP或自定义标记中。
+	 * 
+	 * <p>If a ServletContext is specified, the RequestContext will also work with the root 
+	 * WebApplicationContext (outside a DispatcherServlet).
+	 * 
+	 * <p> 如果指定了ServletContext，则RequestContext也将与根WebApplicationContext一起使用（在DispatcherServlet之外）。
+	 * 
 	 * @param request current HTTP request
 	 * @param servletContext the servlet context of the web application (can be {@code null}; necessary for
 	 * fallback to root WebApplicationContext)
+	 * 
+	 * <p> Web应用程序的servlet上下文（可以为null;是回退到根WebApplicationContext所必需的）
+	 * 
 	 * @see org.springframework.web.context.WebApplicationContext
 	 * @see org.springframework.web.servlet.DispatcherServlet
 	 */
@@ -184,13 +197,25 @@ public class RequestContext {
 
 	/**
 	 * Initialize this context with the given request, using the given model attributes for Errors retrieval.
+	 * 
+	 * <p> 使用给定的模型属性进行错误检索，使用给定的请求初始化此上下文。
+	 * 
 	 * <p>Delegates to {@code getFallbackLocale} and {@code getFallbackTheme} for determining the fallback
 	 * locale and theme, respectively, if no LocaleResolver and/or ThemeResolver can be found in the request.
+	 * 
+	 * <p> 如果在请求中找不到LocaleResolver和/或ThemeResolver，则分别委托getFallbackLocale和getFallbackTheme来确定回退区域设置和主题。
+	 * 
 	 * @param request current HTTP request
 	 * @param servletContext the servlet context of the web application (can be {@code null}; necessary for
 	 * fallback to root WebApplicationContext)
+	 * 
+	 * <p> Web应用程序的servlet上下文（可以为null;是回退到根WebApplicationContext所必需的）
+	 * 
 	 * @param model the model attributes for the current view (can be {@code null}, using the request attributes
 	 * for Errors retrieval)
+	 * 
+	 * <p> 当前视图的模型属性（可以为null，使用Errors检索的请求属性）
+	 * 
 	 * @see #getFallbackLocale
 	 * @see #getFallbackTheme
 	 * @see org.springframework.web.servlet.DispatcherServlet#LOCALE_RESOLVER_ATTRIBUTE
@@ -205,24 +230,33 @@ public class RequestContext {
 
 		// Fetch WebApplicationContext, either from DispatcherServlet or the root context.
 		// ServletContext needs to be specified to be able to fall back to the root context!
+		
+		/*
+		 * 从DispatcherServlet或根上下文中获取WebApplicationContext。 需要指定ServletContext才能回退到根上下文！
+		 */
 		this.webApplicationContext = (WebApplicationContext) request.getAttribute(WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 		if (this.webApplicationContext == null) {
 			this.webApplicationContext = RequestContextUtils.getWebApplicationContext(request, servletContext);
 		}
 
 		// Determine locale to use for this RequestContext.
+		// 确定要用于此RequestContext的区域设置。
 		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
 		if (localeResolver != null) {
 			// Try LocaleResolver (we're within a DispatcherServlet request).
+			// 尝试LocaleResolver（我们在DispatcherServlet请求中）。
 			this.locale = localeResolver.resolveLocale(request);
 		}
 		else {
 			// No LocaleResolver available -> try fallback.
+			// 没有可用的LocaleResolver  - >尝试回退。
 			this.locale = getFallbackLocale();
 		}
 
 		// Determine default HTML escape setting from the "defaultHtmlEscape"
 		// context-param in web.xml, if any.
+		
+		// 从web.xml中的“defaultHtmlEscape”context-param确定默认的HTML转义设置（如果有）。
 		this.defaultHtmlEscape = WebUtils.getDefaultHtmlEscape(this.webApplicationContext.getServletContext());
 
 		this.urlPathHelper = new UrlPathHelper();

@@ -32,6 +32,8 @@ import org.springframework.web.util.WebUtils;
  * Filter base class that aims to guarantee a single execution per request
  * dispatch, on any servlet container. It provides a {@link #doFilterInternal}
  * method with HttpServletRequest and HttpServletResponse arguments.
+ * 
+ * <p> 过滤器基类，旨在确保在任何servlet容器上每个请求分派单个执行。它提供带有HttpServletRequest和HttpServletResponse参数的doFilterInternal方法。
  *
  * <p>As of Servlet 3.0, a filter may be invoked as part of a
  * {@link javax.servlet.DispatcherType#REQUEST REQUEST} or
@@ -44,21 +46,34 @@ import org.springframework.web.util.WebUtils;
  * of dispatches in order to provide thread initialization, logging, security,
  * and so on. This mechanism complements and does not replace the need to
  * configure a filter in {@code web.xml} with dispatcher types.
+ * 
+ * <p> 从Servlet 3.0开始，过滤器可以作为在单独线程中发生的REQUEST或ASYNC调度的一部分来调用。
+ * 可以在web.xml中配置过滤器，是否应将其包含在异步调度中。但是，在某些情况下，servlet容器采用不同的默认配置。
+ * 因此，子类可以重写方法shouldNotFilterAsyncDispatch（）以静态声明是否确实要在两种类型的调度期间一次调用它们，
+ * 以提供线程初始化，日志记录，安全性等。这种机制补充了并没有取代使用调度程序类型在web.xml中配置过滤器的需求。
  *
  * <p>Subclasses may use {@link #isAsyncDispatch(HttpServletRequest)} to
  * determine when a filter is invoked as part of an async dispatch, and use
  * {@link #isAsyncStarted(HttpServletRequest)} to determine when the request
  * has been placed in async mode and therefore the current dispatch won't be
  * the last one for the given request.
+ * 
+ * <p> 子类可以使用isAsyncDispatch（HttpServletRequest）确定何时将过滤器作为异步调度的一部分来调用，
+ * 并使用isAsyncStarted（HttpServletRequest）确定何时将请求置于异步模式，因此当前调度将不是最后一个对于给定的请求。
  *
  * <p>Yet another dispatch type that also occurs in its own thread is
  * {@link javax.servlet.DispatcherType#ERROR ERROR}. Subclasses can override
  * {@link #shouldNotFilterErrorDispatch()} if they wish to declare statically
  * if they should be invoked <em>once</em> during error dispatches.
+ * 
+ * <p> 在其自己的线程中也发生的另一种调度类型是ERROR。如果子类希望在错误分配期间被调用一次，则可以静态声明，
+ * 则子类可以重写shouldNotFilterErrorDispatch（）。
  *
  * <p>The {@link #getAlreadyFilteredAttributeName} method determines how to
  * identify that a request is already filtered. The default implementation is
  * based on the configured name of the concrete filter instance.
+ * 
+ * <p> getAlreadyFilteredAttributeName方法确定如何标识请求已被过滤。默认实现基于具体过滤器实例的配置名称。
  *
  * @author Juergen Hoeller
  * @author Rossen Stoyanchev
@@ -69,6 +84,9 @@ public abstract class OncePerRequestFilter extends GenericFilterBean {
 	/**
 	 * Suffix that gets appended to the filter name for the
 	 * "already filtered" request attribute.
+	 * 
+	 * <p> 后缀添加到“已过滤”请求属性的过滤器名称之后。
+	 * 
 	 * @see #getAlreadyFilteredAttributeName
 	 */
 	public static final String ALREADY_FILTERED_SUFFIX = ".FILTERED";
@@ -78,6 +96,9 @@ public abstract class OncePerRequestFilter extends GenericFilterBean {
 	 * This {@code doFilter} implementation stores a request attribute for
 	 * "already filtered", proceeding without filtering again if the
 	 * attribute is already there.
+	 * 
+	 * <p> 此doFilter实现为“已过滤”存储请求属性，如果该属性已经存在，则继续进行而不进行过滤。
+	 * 
 	 * @see #getAlreadyFilteredAttributeName
 	 * @see #shouldNotFilter
 	 * @see #doFilterInternal
@@ -207,8 +228,13 @@ public abstract class OncePerRequestFilter extends GenericFilterBean {
 	 * Same contract as for {@code doFilter}, but guaranteed to be
 	 * just invoked once per request within a single request thread.
 	 * See {@link #shouldNotFilterAsyncDispatch()} for details.
+	 * 
+	 * <p> 与doFilter的合同相同，但保证在单个请求线程中每个请求仅被调用一次。 有关详细信息，请参见shouldNotFilterAsyncDispatch（）。
+	 * 
 	 * <p>Provides HttpServletRequest and HttpServletResponse arguments instead of the
 	 * default ServletRequest and ServletResponse ones.
+	 * 
+	 * <p> 提供HttpServletRequest和HttpServletResponse参数，而不是默认的ServletRequest和ServletResponse参数。
 	 */
 	protected abstract void doFilterInternal(
 			HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

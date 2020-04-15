@@ -24,9 +24,14 @@ import org.springframework.core.Ordered;
  * {@link org.springframework.context.ApplicationListener} decorator that filters
  * events from a specified event source, invoking its delegate listener for
  * matching {@link org.springframework.context.ApplicationEvent} objects only.
+ * 
+ * <p> org.springframework.context.ApplicationListener装饰器，用于过滤来自指定事件源的事件，
+ * 仅调用其委托侦听器以匹配org.springframework.context.ApplicationEvent对象。
  *
  * <p>Can also be used as base class, overriding the {@link #onApplicationEventInternal}
  * method instead of specifying a delegate listener.
+ * 
+ * <p> 也可以用作基类，覆盖onApplicationEventInternal方法，而不是指定委托侦听器。
  *
  * @author Juergen Hoeller
  * @since 2.0.5
@@ -40,10 +45,19 @@ public class SourceFilteringListener implements SmartApplicationListener {
 
 	/**
 	 * Create a SourceFilteringListener for the given event source.
+	 * 
+	 * <p> 为给定的事件源创建SourceFilteringListener。
+	 * 
 	 * @param source the event source that this listener filters for,
 	 * only processing events from this source
+	 * 
+	 * <p> 此侦听器筛选的事件源，仅处理来自此源的事件
+	 * 
 	 * @param delegate the delegate listener to invoke with event
 	 * from the specified source
+	 * 
+	 * <p> 委托侦听器使用指定源中的事件进行调用
+	 * 
 	 */
 	public SourceFilteringListener(Object source, ApplicationListener delegate) {
 		this.source = source;
@@ -55,8 +69,14 @@ public class SourceFilteringListener implements SmartApplicationListener {
 	 * Create a SourceFilteringListener for the given event source,
 	 * expecting subclasses to override the {@link #onApplicationEventInternal}
 	 * method (instead of specifying a delegate listener).
+	 * 
+	 * <p> 期望为给定的事件源创建SourceFilteringListener，
+	 * 期望子类覆盖onApplicationEventInternal方法（而不是指定委托侦听器）。
+	 * 
 	 * @param source the event source that this listener filters for,
 	 * only processing events from this source
+	 * 
+	 * <p> 此侦听器筛选的事件源，仅处理来自此源的事件
 	 */
 	protected SourceFilteringListener(Object source) {
 		this.source = source;

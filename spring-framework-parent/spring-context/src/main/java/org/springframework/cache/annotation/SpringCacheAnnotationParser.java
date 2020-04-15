@@ -31,6 +31,8 @@ import org.springframework.util.ObjectUtils;
 /**
  * Strategy implementation for parsing Spring's {@link Caching}, {@link Cacheable},
  * {@link CacheEvict} and {@link CachePut} annotations.
+ * 
+ * <p> 解析Spring的Caching，Cacheable，CacheEvict和CachePut批注的策略实现。
  *
  * @author Costin Leau
  * @author Juergen Hoeller

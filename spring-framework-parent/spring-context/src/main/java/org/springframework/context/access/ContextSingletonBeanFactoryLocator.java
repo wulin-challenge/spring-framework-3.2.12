@@ -38,11 +38,19 @@ import org.springframework.core.io.support.ResourcePatternUtils;
  * The main reason one would need to use this class is if bean post-processing
  * (or other ApplicationContext specific features are needed in the bean reference
  * definition itself).
+ * 
+ * <p> org.springframework.beans.factory.access.SingletonBeanFactoryLocator的变体，它将其内部bean工厂引用创建为
+ * org.springframework.context.ApplicationContext，而不是SingletonBeanFactoryLocator的简单BeanFactory。 
+ * 对于几乎所有使用场景，这都没有区别，因为在ApplicationContext或BeanFactory中，您仍可以自由定义
+ * BeanFactory或ApplicationContext实例。 需要使用此类的主要原因是bean后处理（或bean引用定义本身需要其他ApplicationContext特定功能）。
  *
  * <p><strong>Note:</strong> This class uses <strong>classpath*:beanRefContext.xml</strong>
  * as the default resource location for the bean factory reference definition files.
  * It is not possible nor legal to share definitions with SingletonBeanFactoryLocator
  * at the same time.
+ * 
+ * <p> 注意：此类使用classpath *：beanRefContext.xml作为Bean工厂引用定义文件的缺省资源位置。 
+ * 同时与SingletonBeanFactoryLocator共享定义是不可能也不合法的。
  *
  * @author Colin Sampaleanu
  * @author Juergen Hoeller

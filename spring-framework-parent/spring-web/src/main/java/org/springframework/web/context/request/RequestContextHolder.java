@@ -27,6 +27,9 @@ import org.springframework.util.ClassUtils;
  * {@link RequestAttributes} object. The request will be inherited
  * by any child threads spawned by the current thread if the
  * {@code inheritable} flag is set to {@code true}.
+ * 
+ * <p> Holder类以线程绑定的RequestAttributes对象的形式公开Web请求。 
+ * 如果可继承标志设置为true，则当前线程生成的任何子线程将继承该请求。
  *
  * <p>Use {@link RequestContextListener} or
  * {@link org.springframework.web.filter.RequestContextFilter} to expose
@@ -34,6 +37,10 @@ import org.springframework.util.ClassUtils;
  * {@link org.springframework.web.servlet.DispatcherServlet} and
  * {@link org.springframework.web.portlet.DispatcherPortlet} already
  * expose the current request by default.
+ * 
+ * <p> 使用RequestContextListener或org.springframework.web.filter.RequestContextFilter
+ * 公开当前Web请求。 请注意，默认情况下，org.springframework.web.servlet.DispatcherServlet和
+ * org.springframework.web.portlet.DispatcherPortlet已公开当前请求。
  *
  * @author Juergen Hoeller
  * @author Rod Johnson
@@ -57,6 +64,9 @@ public abstract class RequestContextHolder  {
 
 	/**
 	 * Reset the RequestAttributes for the current thread.
+	 * 
+	 * <p> 重置当前线程的RequestAttributes。
+	 * 
 	 */
 	public static void resetRequestAttributes() {
 		requestAttributesHolder.remove();
@@ -75,10 +85,19 @@ public abstract class RequestContextHolder  {
 
 	/**
 	 * Bind the given RequestAttributes to the current thread.
+	 * 
+	 * <p> 将给定的RequestAttributes绑定到当前线程。
+	 * 
 	 * @param attributes the RequestAttributes to expose,
 	 * or {@code null} to reset the thread-bound context
+	 * 
+	 * <p> RequestAttributes公开，或null以重置线程绑定上下文
+	 * 
 	 * @param inheritable whether to expose the RequestAttributes as inheritable
 	 * for child threads (using an {@link InheritableThreadLocal})
+	 * 
+	 * <p> 是否将RequestAttributes公开为子线程可继承（使用InheritableThreadLocal）
+	 * 
 	 */
 	public static void setRequestAttributes(RequestAttributes attributes, boolean inheritable) {
 		if (attributes == null) {
@@ -98,8 +117,13 @@ public abstract class RequestContextHolder  {
 
 	/**
 	 * Return the RequestAttributes currently bound to the thread.
+	 * 
+	 * <p> 返回当前绑定到该线程的RequestAttributes。
+	 * 
 	 * @return the RequestAttributes currently bound to the thread,
 	 * or {@code null} if none bound
+	 * 
+	 * <p> RequestAttributes当前绑定到线程，如果没有绑定则为null
 	 */
 	public static RequestAttributes getRequestAttributes() {
 		RequestAttributes attributes = requestAttributesHolder.get();

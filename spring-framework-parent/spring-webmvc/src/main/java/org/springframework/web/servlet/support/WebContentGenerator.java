@@ -239,10 +239,18 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	 * Check and prepare the given request and response according to the settings
 	 * of this generator. Checks for supported methods and a required session,
 	 * and applies the number of cache seconds specified for this generator.
+	 * 
+	 * <p> 根据此生成器的设置检查并准备给定的请求和响应。 检查支持的方法和所需的会话，并应用为此生成器指定的缓存秒数。
+	 * 
 	 * @param request current HTTP request
 	 * @param response current HTTP response
 	 * @param lastModified if the mapped handler provides Last-Modified support
+	 * 
+	 * <p> 如果映射的处理程序提供Last-Modified支持
+	 * 
 	 * @throws ServletException if the request cannot be handled because a check failed
+	 * 
+	 * <p> 如果由于检查失败而无法处理请求
 	 */
 	protected final void checkAndPrepare(
 			HttpServletRequest request, HttpServletResponse response, boolean lastModified)
@@ -255,18 +263,32 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	 * Check and prepare the given request and response according to the settings
 	 * of this generator. Checks for supported methods and a required session,
 	 * and applies the given number of cache seconds.
+	 * 
+	 * <p> 根据此生成器的设置检查并准备给定的请求和响应。 检查支持的方法和所需的会话，并应用给定的缓存秒数。
+	 * 
 	 * @param request current HTTP request
 	 * @param response current HTTP response
 	 * @param cacheSeconds positive number of seconds into the future that the
 	 * response should be cacheable for, 0 to prevent caching
+	 * 
+	 * <p> 将来可以缓存响应的正数秒，以防止缓存
+	 * 
 	 * @param lastModified if the mapped handler provides Last-Modified support
+	 * 
+	 * <p> 如果映射的处理程序提供Last-Modified支持
+	 * 
 	 * @throws ServletException if the request cannot be handled because a check failed
+	 * 
+	 * <p> 如果由于检查失败而无法处理请求
+	 * 
 	 */
 	protected final void checkAndPrepare(
 			HttpServletRequest request, HttpServletResponse response, int cacheSeconds, boolean lastModified)
 			throws ServletException {
 
 		// Check whether we should support the request method.
+		// 检查我们是否应该支持请求方法。
+		
 		String method = request.getMethod();
 		if (this.supportedMethods != null && !this.supportedMethods.contains(method)) {
 			throw new HttpRequestMethodNotSupportedException(
@@ -274,6 +296,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 		}
 
 		// Check whether a session is required.
+		// 检查是否需要会话。
 		if (this.requireSession) {
 			if (request.getSession(false) == null) {
 				throw new HttpSessionRequiredException("Pre-existing session required but none found");
@@ -282,12 +305,16 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 
 		// Do declarative cache control.
 		// Revalidate if the controller supports last-modified.
+		
+		// 做声明性缓存控制。 如果控制器支持最后修改，则重新验证。
 		applyCacheSeconds(response, cacheSeconds, lastModified);
 	}
 
 	/**
 	 * Prevent the response from being cached.
 	 * See {@code http://www.mnot.net/cache_docs}.
+	 * 
+	 * <p> 防止响应被缓存。 请参阅http://www.mnot.net/cache_docs。
 	 */
 	protected final void preventCaching(HttpServletResponse response) {
 		response.setHeader(HEADER_PRAGMA, "no-cache");
@@ -298,6 +325,8 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 		if (this.useCacheControlHeader) {
 			// HTTP 1.1 header: "no-cache" is the standard value,
 			// "no-store" is necessary to prevent caching on FireFox.
+			
+			// HTTP 1.1标头：“no-cache”是标准值，“no-store”是防止FireFox缓存所必需的。
 			response.setHeader(HEADER_CACHE_CONTROL, "no-cache");
 			if (this.useCacheControlNoStore) {
 				response.addHeader(HEADER_CACHE_CONTROL, "no-store");
@@ -321,11 +350,19 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	 * Set HTTP headers to allow caching for the given number of seconds.
 	 * Tells the browser to revalidate the resource if mustRevalidate is
 	 * {@code true}.
+	 * 
+	 * <p> 设置HTTP标头以允许缓存给定的秒数。 如果mustRevalidate为true，则告诉浏览器重新验证资源。
+	 * 
 	 * @param response the current HTTP response
 	 * @param seconds number of seconds into the future that the response
 	 * should be cacheable for
+	 * 
+	 * <p> 响应应该可缓存的未来秒数
+	 * 
 	 * @param mustRevalidate whether the client should revalidate the resource
 	 * (typically only necessary for controllers with last-modified support)
+	 * 
+	 * <p> 客户端是否应该重新验证资源（通常仅对具有上次修改支持的控制器是必需的）
 	 */
 	protected final void cacheForSeconds(HttpServletResponse response, int seconds, boolean mustRevalidate) {
 		if (this.useExpiresHeader) {
@@ -358,15 +395,26 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 
 	/**
 	 * Apply the given cache seconds and generate respective HTTP headers.
+	 * 
+	 * <p> 应用给定的缓存秒并生成相应的HTTP标头。
+	 * 
 	 * <p>That is, allow caching for the given number of seconds in the
 	 * case of a positive value, prevent caching if given a 0 value, else
 	 * do nothing (i.e. leave caching to the client).
+	 * 
+	 * <p> 也就是说，在正值的情况下允许缓存给定的秒数，如果给定0值则禁止缓存，否则什么也不做（即将缓存留给客户端）。
+	 * 
 	 * @param response the current HTTP response
 	 * @param seconds the (positive) number of seconds into the future that
 	 * the response should be cacheable for; 0 to prevent caching; and
 	 * a negative value to leave caching to the client.
+	 * 
+	 * <p> 响应应该可缓存的（正）未来秒数; 0以防止缓存; 以及将缓存留给客户端的负值。
+	 * 
 	 * @param mustRevalidate whether the client should revalidate the resource
 	 * (typically only necessary for controllers with last-modified support)
+	 * 
+	 * <p> 客户端是否应该重新验证资源（通常仅对具有上次修改支持的控制器是必需的）
 	 */
 	protected final void applyCacheSeconds(HttpServletResponse response, int seconds, boolean mustRevalidate) {
 		if (seconds > 0) {
@@ -376,6 +424,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 			preventCaching(response);
 		}
 		// Leave caching to the client otherwise.
+		// 否则将缓存留给客户端。
 	}
 
 }

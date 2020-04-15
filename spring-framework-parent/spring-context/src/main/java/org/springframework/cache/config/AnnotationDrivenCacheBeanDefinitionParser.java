@@ -35,12 +35,18 @@ import org.springframework.context.annotation.AnnotationConfigUtils;
  * implementation that allows users to easily configure all the
  * infrastructure beans required to enable annotation-driven cache
  * demarcation.
+ * 
+ * <p> org.springframework.beans.factory.xml.BeanDefinitionParser实现，
+ * 使用户可以轻松配置启用注释驱动的缓存划分所需的所有基础结构bean。
  *
  * <p>By default, all proxies are created as JDK proxies. This may cause
  * some problems if you are injecting objects as concrete classes rather
  * than interfaces. To overcome this restriction you can set the
  * '{@code proxy-target-class}' attribute to '{@code true}', which will
  * result in class-based proxies being created.
+ * 
+ * <p> 默认情况下，所有代理都创建为JDK代理。 如果将对象作为具体的类而不是接口注入，则可能会引起一些问题。 
+ * 为了克服此限制，您可以将'proxy-target-class'属性设置为'true'，这将导致创建基于类的代理。
  *
  * @author Costin Leau
  * @since 3.1
@@ -51,6 +57,8 @@ class AnnotationDrivenCacheBeanDefinitionParser implements BeanDefinitionParser 
 	 * Parses the '{@code <cache:annotation-driven>}' tag. Will
 	 * {@link AopNamespaceUtils#registerAutoProxyCreatorIfNecessary
 	 * register an AutoProxyCreator} with the container as necessary.
+	 * 
+	 * <p> 解析“ <cache：annotation-driven>”标签。 必要时将在容器中注册一个AutoProxyCreator。
 	 */
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		String mode = element.getAttribute("mode");
@@ -94,6 +102,8 @@ class AnnotationDrivenCacheBeanDefinitionParser implements BeanDefinitionParser 
 
 	/**
 	 * Inner class to just introduce an AOP framework dependency when actually in proxy mode.
+	 * 
+	 * <p> 内部类，仅在实际处于代理模式时才引入AOP框架依赖关系。
 	 */
 	private static class AopAutoProxyConfigurer {
 

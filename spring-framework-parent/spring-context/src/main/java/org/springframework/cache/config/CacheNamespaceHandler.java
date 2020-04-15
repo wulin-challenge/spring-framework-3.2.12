@@ -25,9 +25,13 @@ import org.w3c.dom.Element;
 /**
  * {@code NamespaceHandler} allowing for the configuration of declarative
  * cache management using either XML or using annotations.
+ * 
+ * <p> NamespaceHandler允许使用XML或注释配置声明式缓存管理。
  *
  * <p>This namespace handler is the central piece of functionality in the
  * Spring cache management facilities.
+ * 
+ * <p> 这个名称空间处理程序是Spring缓存管理工具中的核心功能。
  *
  * @author Costin Leau
  * @since 3.1

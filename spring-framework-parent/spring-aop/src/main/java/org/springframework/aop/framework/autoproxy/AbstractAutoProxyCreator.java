@@ -540,7 +540,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyConfig
 	 */
 	protected TargetSource getCustomTargetSource(Class<?> beanClass, String beanName) {
 		// We can't create fancy target sources for directly registered singletons.
-		// 我们无法为直接注册的单身人士创建奇特的目标来源。
+		// 我们无法为直接注册的单例创建想要的目标来源。
 		if (this.customTargetSourceCreators != null &&
 				this.beanFactory != null && this.beanFactory.containsBean(beanName)) {
 			for (TargetSourceCreator tsc : this.customTargetSourceCreators) {

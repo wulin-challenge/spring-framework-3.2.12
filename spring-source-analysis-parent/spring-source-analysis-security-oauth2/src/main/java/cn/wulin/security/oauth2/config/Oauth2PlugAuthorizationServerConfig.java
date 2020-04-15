@@ -68,20 +68,20 @@ public class Oauth2PlugAuthorizationServerConfig extends AuthorizationServerConf
 	private AuthenticationManager authenticationManager;
 
 	private AuthenticationManagerBuilder auth;
-	private SecurityConfig securityConfig;
+//	private SecurityConfig securityConfig;
 	private AuthorizationServerEndpointsConfigurer endpoints;
 	
 	
 	
 	@Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth,SecurityConfig securityConfig) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		
 //		
-        auth
-            .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+//        auth
+//            .inMemoryAuthentication()
+//                .withUser("user").password("password").roles("USER");
           this.auth = auth;
-          this.securityConfig = securityConfig;
+//          this.securityConfig = securityConfig;
 //        AuthenticationManager object = auth.getObject();
 //        authenticationManager = auth.build();
     }
@@ -98,6 +98,8 @@ public class Oauth2PlugAuthorizationServerConfig extends AuthorizationServerConf
 				.authorizedGrantTypes("authorization_code")
 				.authorizedGrantTypes("password");
 	}
+	
+	
 	
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {

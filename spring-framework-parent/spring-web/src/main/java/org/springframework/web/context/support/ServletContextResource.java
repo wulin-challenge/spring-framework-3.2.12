@@ -36,10 +36,15 @@ import org.springframework.web.util.WebUtils;
  * {@link org.springframework.core.io.Resource} implementation for
  * {@link javax.servlet.ServletContext} resources, interpreting
  * relative paths within the web application root directory.
+ * 
+ * <p> org.springframework.core.io.jesource实现javax.servlet.ServletContext
+ * 资源，解释Web应用程序根目录中的相对路径。
  *
  * <p>Always supports stream access and URL access, but only allows
  * {@code java.io.File} access when the web application archive
  * is expanded.
+ * 
+ * <p> 始终支持流访问和URL访问，但仅在扩展Web应用程序存档时允许java.io.File访问。
  *
  * @author Juergen Hoeller
  * @since 28.12.2003
@@ -56,12 +61,19 @@ public class ServletContextResource extends AbstractFileResolvingResource implem
 
 	/**
 	 * Create a new ServletContextResource.
+	 * 
+	 * <p> 创建一个新的ServletContextResource。
+	 * 
 	 * <p>The Servlet spec requires that resource paths start with a slash,
 	 * even if many containers accept paths without leading slash too.
 	 * Consequently, the given path will be prepended with a slash if it
 	 * doesn't already start with one.
-	 * @param servletContext the ServletContext to load from
-	 * @param path the path of the resource
+	 * 
+	 * <p> Servlet规范要求资源路径以斜杠开头，即使许多容器也接受路径而没有前导斜杠。 
+	 * 因此，如果给定路径尚未以斜杠开头，则它将以斜杠为前缀。
+	 * 
+	 * @param servletContext the ServletContext to load from - 从中加载的ServletContext
+	 * @param path the path of the resource - 资源的路径
 	 */
 	public ServletContextResource(ServletContext servletContext, String path) {
 		// check ServletContext
@@ -79,6 +91,8 @@ public class ServletContextResource extends AbstractFileResolvingResource implem
 
 	/**
 	 * Return the ServletContext for this resource.
+	 * 
+	 * <p> 返回此资源的ServletContext。
 	 */
 	public final ServletContext getServletContext() {
 		return this.servletContext;

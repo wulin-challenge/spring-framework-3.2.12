@@ -23,6 +23,8 @@ import org.springframework.beans.factory.InitializingBean;
 /**
  * Abstract base class for URL-based views. Provides a consistent way of
  * holding the URL that a View wraps, in the form of a "url" bean property.
+ * 
+ * <p> 基于URL的视图的抽象基类。 提供以“url”bean属性的形式保存View包装的URL的一致方法。
  *
  * @author Juergen Hoeller
  * @since 13.12.2003
@@ -80,10 +82,21 @@ public abstract class AbstractUrlBasedView extends AbstractView implements Initi
 	/**
 	 * Check whether the underlying resource that the configured URL points to
 	 * actually exists.
+	 * 
+	 * <p> 检查配置的URL指向的基础资源是否实际存在。
+	 * 
 	 * @param locale the desired Locale that we're looking for
+	 * 
+	 * <p> 我们正在寻找的所需区域设置
+	 * 
 	 * @return {@code true} if the resource exists (or is assumed to exist);
 	 * {@code false} if we know that it does not exist
+	 * 
+	 * <p> 如果资源存在（或假设存在），则为true; 如果我们知道它不存在，则为false
+	 * 
 	 * @throws Exception if the resource exists but is invalid (e.g. could not be parsed)
+	 * 
+	 * <p> 如果资源存在但无效（例如无法解析）
 	 */
 	public boolean checkResource(Locale locale) throws Exception {
 		return true;

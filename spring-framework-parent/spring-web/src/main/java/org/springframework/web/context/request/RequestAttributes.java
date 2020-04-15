@@ -20,9 +20,13 @@ package org.springframework.web.context.request;
  * Abstraction for accessing attribute objects associated with a request.
  * Supports access to request-scoped attributes as well as to session-scoped
  * attributes, with the optional notion of a "global session".
+ * 
+ * <p> 用于访问与请求关联的属性对象的抽象。 支持访问请求范围的属性以及会话范围的属性，具有“全局会话”的可选概念。
  *
  * <p>Can be implemented for any kind of request/session mechanism,
  * in particular for servlet requests and portlet requests.
+ * 
+ * <p> 可以为任何类型的请求/会话机制实现，特别是对于servlet请求和portlet请求。
  *
  * @author Juergen Hoeller
  * @since 2.0
@@ -33,22 +37,36 @@ public interface RequestAttributes {
 
 	/**
 	 * Constant that indicates request scope.
+	 * 
+	 * <p> 表示请求范围的常量。
 	 */
 	int SCOPE_REQUEST = 0;
 
 	/**
 	 * Constant that indicates session scope.
+	 * 
+	 * <p> 表示会话范围的常量。
+	 * 
 	 * <p>This preferably refers to a locally isolated session, if such
 	 * a distinction is available (for example, in a Portlet environment).
 	 * Else, it simply refers to the common session.
+	 * 
+	 * <p> 如果可以进行这种区分（例如，在Portlet环境中），这优选地指的是本地隔离的会话。 
+	 * 否则，它只是指共同会话。
+	 * 
 	 */
 	int SCOPE_SESSION = 1;
 
 	/**
 	 * Constant that indicates global session scope.
+	 * 
+	 * <p> 指示全局会话范围的常量。
+	 * 
 	 * <p>This explicitly refers to a globally shared session, if such
 	 * a distinction is available (for example, in a Portlet environment).
 	 * Else, it simply refers to the common session.
+	 * 
+	 * <p> 如果可以进行此类区分（例如，在Portlet环境中），则显式引用全局共享会话。 否则，它只是指共同会话。
 	 */
 	int SCOPE_GLOBAL_SESSION = 2;
 
@@ -61,6 +79,9 @@ public interface RequestAttributes {
 
 	/**
 	 * Name of the standard reference to the session object: "session".
+	 * 
+	 * <p> 会话对象的标准引用的名称：“session”。
+	 * 
 	 * @see #resolveReference
 	 */
 	String REFERENCE_SESSION = "session";
@@ -68,29 +89,45 @@ public interface RequestAttributes {
 
 	/**
 	 * Return the value for the scoped attribute of the given name, if any.
-	 * @param name the name of the attribute
-	 * @param scope the scope identifier
+	 * 
+	 * <p> 返回给定名称的scoped属性的值（如果有）。
+	 * 
+	 * @param name the name of the attribute - 属性的名称
+	 * @param scope the scope identifier - 范围标识符
 	 * @return the current attribute value, or {@code null} if not found
+	 * 
+	 * <p> 当前属性值，如果未找到则为null
+	 * 
 	 */
 	Object getAttribute(String name, int scope);
 
 	/**
 	 * Set the value for the scoped attribute of the given name,
 	 * replacing an existing value (if any).
-	 * @param name the name of the attribute
-	 * @param scope the scope identifier
-	 * @param value the value for the attribute
+	 * 
+	 * <p> 设置给定名称的scoped属性的值，替换现有值（如果有）。
+	 * 
+	 * @param name the name of the attribute - 属性的名称
+	 * @param scope the scope identifier - 范围标识符
+	 * @param value the value for the attribute - 属性的值
 	 */
 	void setAttribute(String name, Object value, int scope);
 
 	/**
 	 * Remove the scoped attribute of the given name, if it exists.
+	 * 
+	 * <p> 删除给定名称的scoped属性（如果存在）。
+	 * 
 	 * <p>Note that an implementation should also remove a registered destruction
 	 * callback for the specified attribute, if any. It does, however, <i>not</i>
 	 * need to <i>execute</i> a registered destruction callback in this case,
 	 * since the object will be destroyed by the caller (if appropriate).
+	 * 
+	 * <p> 请注意，实现还应删除指定属性的已注册销毁回调（如果有）。 但是，在这种情况下，它不需要执行已注册的销毁回调，
+	 * 因为对象将被调用者销毁（如果适用）。
+	 * 
 	 * @param name the name of the attribute
-	 * @param scope the scope identifier
+	 * @param scope the scope identifier - 范围标识符
 	 */
 	void removeAttribute(String name, int scope);
 

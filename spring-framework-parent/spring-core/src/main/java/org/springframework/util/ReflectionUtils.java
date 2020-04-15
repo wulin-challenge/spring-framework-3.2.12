@@ -622,8 +622,11 @@ public abstract class ReflectionUtils {
 	/**
 	 * Invoke the given callback on all fields in the target class, going up the
 	 * class hierarchy to get all declared fields.
-	 * @param clazz the target class to analyze
-	 * @param fc the callback to invoke for each field
+	 * 
+	 * <p> 在目标类的所有字段上调用给定的回调，向上运行类层次结构以获取所有声明的字段。
+	 * 
+	 * @param clazz the target class to analyze - 要分析的目标类
+	 * @param fc the callback to invoke for each field - 为每个字段调用的回调
 	 */
 	public static void doWithFields(Class<?> clazz, FieldCallback fc) throws IllegalArgumentException {
 		doWithFields(clazz, fc, null);
@@ -632,9 +635,15 @@ public abstract class ReflectionUtils {
 	/**
 	 * Invoke the given callback on all fields in the target class, going up the
 	 * class hierarchy to get all declared fields.
-	 * @param clazz the target class to analyze
-	 * @param fc the callback to invoke for each field
+	 * 
+	 * <p> 在目标类的所有字段上调用给定的回调，向上运行类层次结构以获取所有声明的字段。
+	 * 
+	 * @param clazz the target class to analyze - 要分析的目标类
+	 * @param fc the callback to invoke for each field - 为每个字段调用的回调
 	 * @param ff the filter that determines the fields to apply the callback to
+	 * 
+	 * <p> 确定要应用回调的字段的过滤器
+	 * 
 	 */
 	public static void doWithFields(Class<?> clazz, FieldCallback fc, FieldFilter ff)
 			throws IllegalArgumentException {
@@ -715,12 +724,17 @@ public abstract class ReflectionUtils {
 
 	/**
 	 * Callback interface invoked on each field in the hierarchy.
+	 * 
+	 * <p> 在层次结构中的每个字段上调用回调接口。
 	 */
 	public interface FieldCallback {
 
 		/**
 		 * Perform an operation using the given field.
-		 * @param field the field to operate on
+		 * 
+		 * <p> 使用给定字段执行操作。
+		 * 
+		 * @param field the field to operate on - 要操作的字段
 		 */
 		void doWith(Field field) throws IllegalArgumentException, IllegalAccessException;
 	}

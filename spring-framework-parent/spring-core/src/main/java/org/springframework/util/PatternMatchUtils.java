@@ -19,6 +19,8 @@ package org.springframework.util;
 /**
  * Utility methods for simple pattern matching, in particular for
  * Spring's typical "xxx*", "*xxx" and "*xxx*" pattern styles.
+ * 
+ * <p> 用于简单模式匹配的实用方法，特别是Spring的典型“xxx *”，“* xxx”和“* xxx *”模式样式。
  *
  * @author Juergen Hoeller
  * @since 2.0
@@ -29,9 +31,12 @@ public abstract class PatternMatchUtils {
 	 * Match a String against the given pattern, supporting the following simple
 	 * pattern styles: "xxx*", "*xxx", "*xxx*" and "xxx*yyy" matches (with an
 	 * arbitrary number of pattern parts), as well as direct equality.
-	 * @param pattern the pattern to match against
+	 * 
+	 * <p> 将String与给定模式匹配，支持以下简单模式样式：“xxx *”，“* xxx”，“* xxx *”和“xxx * yyy”匹配（具有任意数量的模式部分），以及 直接平等。
+	 * 
+	 * @param pattern the pattern to match against - 要匹配的模式
 	 * @param str the String to match
-	 * @return whether the String matches the given pattern
+	 * @return whether the String matches the given pattern - String是否与给定模式匹配
 	 */
 	public static boolean simpleMatch(String pattern, String str) {
 		if (pattern == null || str == null) {
@@ -68,9 +73,16 @@ public abstract class PatternMatchUtils {
 	 * Match a String against the given patterns, supporting the following simple
 	 * pattern styles: "xxx*", "*xxx", "*xxx*" and "xxx*yyy" matches (with an
 	 * arbitrary number of pattern parts), as well as direct equality.
-	 * @param patterns the patterns to match against
+	 * 
+	 * <p> 匹配给定模式的字符串，支持以下简单模式样式：“xxx *”，“* xxx”，“* xxx *”和“xxx * yyy”匹配（具有任意数量的模式部分），
+	 * 以及 直接平等。
+	 * 
+	 * @param patterns the patterns to match against - 要匹配的模式
 	 * @param str the String to match
 	 * @return whether the String matches any of the given patterns
+	 * 
+	 * <p> String是否与任何给定模式匹配
+	 * 
 	 */
 	public static boolean simpleMatch(String[] patterns, String str) {
 		if (patterns != null) {

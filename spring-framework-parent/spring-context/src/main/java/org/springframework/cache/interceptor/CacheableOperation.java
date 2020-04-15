@@ -18,6 +18,8 @@ package org.springframework.cache.interceptor;
 
 /**
  * Class describing a cache 'cacheable' operation.
+ * 
+ * <p> 描述缓存“可缓存”操作的内容。
  *
  * @author Costin Leau
  * @author Phillip Webb

@@ -36,6 +36,8 @@ import org.springframework.web.util.UrlPathHelper;
 /**
  * The central class for managing asynchronous request processing, mainly intended
  * as an SPI and not typically used directly by application classes.
+ * 
+ * <p> 用于管理异步请求处理的中心类，主要用作SPI，通常不由应用程序类直接使用。
  *
  * <p>An async scenario starts with request processing as usual in a thread (T1).
  * Concurrent request handling can be initiated by calling
@@ -46,6 +48,10 @@ import org.springframework.web.util.UrlPathHelper;
  * result in a third thread (T3). Within the dispatched thread (T3), the saved
  * result can be accessed via {@link #getConcurrentResult()} or its presence
  * detected via {@link #hasConcurrentResult()}.
+ * 
+ * <p> 异步方案在线程（T1）中像往常一样开始请求处理。 可以通过调用startCallableProcessing或startDeferredResultProcessing
+ * 来启动并发请求处理，这两者都在单独的线程（T2）中生成结果。 保存结果并将请求分派给容器，以便在第三个线程（T3）中恢复已保存结果的处理。 
+ * 在调度线程（T3）中，可以通过getConcurrentResult（）访问保存的结果，或通过hasConcurrentResult（）检测其存在。
  *
  * @author Rossen Stoyanchev
  * @since 3.2
@@ -86,6 +92,9 @@ public final class WebAsyncManager {
 
 	/**
 	 * Package-private constructor.
+	 * 
+	 * <p> 包私有构造函数。
+	 * 
 	 * @see WebAsyncUtils#getAsyncManager(javax.servlet.ServletRequest)
 	 * @see WebAsyncUtils#getAsyncManager(org.springframework.web.context.request.WebRequest)
 	 */
@@ -100,7 +109,12 @@ public final class WebAsyncManager {
 	 * wrapping, etc). However, it should not be set while concurrent handling
 	 * is in progress, i.e. while {@link #isConcurrentHandlingStarted()} is
 	 * {@code true}.
-	 * @param asyncWebRequest the web request to use
+	 * 
+	 * <p> 配置要使用的AsyncWebRequest。 在单个请求期间可以多次设置该属性以准确地反映请求的当前状态
+	 * （例如，在转发，请求/响应包装等之后）。 但是，在并发处理正在进行时不应设置它，即
+	 * isConcurrentHandlingStarted（）为true时。
+	 * 
+	 * @param asyncWebRequest the web request to use - 要使用的Web请求
 	 */
 	public void setAsyncWebRequest(final AsyncWebRequest asyncWebRequest) {
 		Assert.notNull(asyncWebRequest, "AsyncWebRequest must not be null");
@@ -129,6 +143,9 @@ public final class WebAsyncManager {
 	 * of "false" means concurrent handling was either not started or possibly
 	 * that it has completed and the request was dispatched for further
 	 * processing of the concurrent result.
+	 * 
+	 * <p> 当前请求的所选处理程序是否选择异步处理请求。 返回值“true”表示正在进行并发处理，响应将保持打开状态。 
+	 * 返回值“false”表示并发处理未启动或可能已完成，并且已分派请求以进一步处理并发结果。
 	 */
 	public boolean isConcurrentHandlingStarted() {
 		return ((this.asyncWebRequest != null) && this.asyncWebRequest.isAsyncStarted());
@@ -136,6 +153,8 @@ public final class WebAsyncManager {
 
 	/**
 	 * Whether a result value exists as a result of concurrent handling.
+	 * 
+	 * <p> 结果值是否因并发处理而存在。
 	 */
 	public boolean hasConcurrentResult() {
 		return (this.concurrentResult != RESULT_NONE);
@@ -180,8 +199,10 @@ public final class WebAsyncManager {
 
 	/**
 	 * Register a {@link CallableProcessingInterceptor} under the given key.
+	 * 
+	 * <p> 在给定key注册CallableProcessingInterceptor。
 	 * @param key the key
-	 * @param interceptor the interceptor to register
+	 * @param interceptor the interceptor to register - 要注册的拦截器
 	 */
 	public void registerCallableInterceptor(Object key, CallableProcessingInterceptor interceptor) {
 		Assert.notNull(key, "Key is required");

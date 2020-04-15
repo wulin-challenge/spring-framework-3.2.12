@@ -30,6 +30,8 @@ import org.springframework.cache.CacheManager;
 /**
  * Abstract base class implementing the common {@link CacheManager} methods.
  * Useful for 'static' environments where the backing caches do not change.
+ * 
+ * <p> 实现公共CacheManager方法的抽象基类。 对于备用缓存不变的“静态”环境很有用。
  *
  * @author Costin Leau
  * @author Juergen Hoeller
@@ -46,6 +48,7 @@ public abstract class AbstractCacheManager implements CacheManager, Initializing
 		Collection<? extends Cache> caches = loadCaches();
 
 		// Preserve the initial order of the cache names
+		// 保留缓存名称的初始顺序
 		this.cacheMap.clear();
 		this.cacheNames.clear();
 		for (Cache cache : caches) {
@@ -60,9 +63,18 @@ public abstract class AbstractCacheManager implements CacheManager, Initializing
 
 	/**
 	 * Decorate the given Cache object if necessary.
+	 * 
+	 * <p> 如有必要，装饰给定的Cache对象。
+	 * 
 	 * @param cache the Cache object to be added to this CacheManager
+	 * 
+	 * <p> 要添加到此CacheManager的Cache对象
+	 * 
 	 * @return the decorated Cache object to be used instead,
 	 * or simply the passed-in Cache object by default
+	 * 
+	 * <p> 装饰的Cache对象代替使用，或者默认情况下只是传入的Cache对象
+	 * 
 	 */
 	protected Cache decorateCache(Cache cache) {
 		return cache;

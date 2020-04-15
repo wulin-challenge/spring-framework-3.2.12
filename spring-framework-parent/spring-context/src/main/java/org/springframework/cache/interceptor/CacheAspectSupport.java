@@ -39,20 +39,30 @@ import org.springframework.util.StringUtils;
 /**
  * Base class for caching aspects, such as the {@link CacheInterceptor}
  * or an AspectJ aspect.
+ * 
+ * <p> 缓存方面的基类，例如CacheInterceptor或AspectJ方面。
  *
  * <p>This enables the underlying Spring caching infrastructure to be
  * used easily to implement an aspect for any aspect system.
+ * 
+ * <p> 这使基础的Spring缓存基础结构可以轻松地用于为任何方面系统实现方面。
  *
  * <p>Subclasses are responsible for calling methods in this class in
  * the correct order.
+ * 
+ * <p> 子类负责以正确的顺序调用此类中的方法。
  *
  * <p>Uses the <b>Strategy</b> design pattern. A {@link CacheManager}
  * implementation will perform the actual cache management, and a
  * {@link CacheOperationSource} is used for determining caching
  * operations.
+ * 
+ * <p> 使用策略设计模式。 CacheManager实现将执行实际的缓存管理，并且CacheOperationSource用于确定缓存操作。
  *
  * <p>A cache aspect is serializable if its {@code CacheManager} and
  * {@code CacheOperationSource} are serializable.
+ * 
+ * <p> 如果缓存方面的CacheManager和CacheOperationSource是可序列化的，则它是可序列化的。
  *
  * @author Costin Leau
  * @author Juergen Hoeller
@@ -84,6 +94,8 @@ public abstract class CacheAspectSupport implements InitializingBean {
 
 	/**
 	 * Set the CacheManager that this cache aspect should delegate to.
+	 * 
+	 * <p> 设置此缓存方面应委派的CacheManager。
 	 */
 	public void setCacheManager(CacheManager cacheManager) {
 		this.cacheManager = cacheManager;
@@ -91,6 +103,8 @@ public abstract class CacheAspectSupport implements InitializingBean {
 
 	/**
 	 * Return the CacheManager that this cache aspect delegates to.
+	 * 
+	 * <p> 返回此缓存方面委托的CacheManager。
 	 */
 	public CacheManager getCacheManager() {
 		return this.cacheManager;
@@ -100,6 +114,9 @@ public abstract class CacheAspectSupport implements InitializingBean {
 	 * Set one or more cache operation sources which are used to find the cache
 	 * attributes. If more than one source is provided, they will be aggregated using a
 	 * {@link CompositeCacheOperationSource}.
+	 * 
+	 * <p> 设置一个或多个用于查找缓存属性的缓存操作源。 如果提供了多个源，则将使用CompositeCacheOperationSource对其进行汇总。
+	 * 
 	 * @param cacheOperationSources must not be {@code null}
 	 */
 	public void setCacheOperationSources(CacheOperationSource... cacheOperationSources) {
@@ -110,6 +127,8 @@ public abstract class CacheAspectSupport implements InitializingBean {
 
 	/**
 	 * Return the CacheOperationSource for this cache aspect.
+	 * 
+	 * <p> 返回此缓存方面的CacheOperationSource。
 	 */
 	public CacheOperationSource getCacheOperationSource() {
 		return this.cacheOperationSource;
@@ -118,6 +137,8 @@ public abstract class CacheAspectSupport implements InitializingBean {
 	/**
 	 * Set the KeyGenerator for this cache aspect.
 	 * Default is {@link DefaultKeyGenerator}.
+	 * 
+	 * <p> 为此缓存方面设置KeyGenerator。 默认值为DefaultKeyGenerator。
 	 */
 	public void setKeyGenerator(KeyGenerator keyGenerator) {
 		this.keyGenerator = keyGenerator;
@@ -125,6 +146,8 @@ public abstract class CacheAspectSupport implements InitializingBean {
 
 	/**
 	 * Return the KeyGenerator for this cache aspect,
+	 * 
+	 * <p> 返回此缓存方面的KeyGenerator，
 	 */
 	public KeyGenerator getKeyGenerator() {
 		return this.keyGenerator;
@@ -147,9 +170,15 @@ public abstract class CacheAspectSupport implements InitializingBean {
 	 * Convenience method to return a String representation of this Method
 	 * for use in logging. Can be overridden in subclasses to provide a
 	 * different identifier for the given method.
+	 * 
+	 * <p> 返回此方法的String表示形式以便在日志记录中使用的便捷方法。 可以在子类中重写以为给定方法提供不同的标识符。
+	 * 
 	 * @param method the method we're interested in
-	 * @param targetClass class the method is on
-	 * @return log message identifying this method
+	 * 
+	 * <p> 我们感兴趣的方法
+	 * 
+	 * @param targetClass class the method is on - 方法打开的类
+	 * @return log message identifying this method - 记录此方法的日志消息
 	 * @see org.springframework.util.ClassUtils#getQualifiedMethodName
 	 */
 	protected String methodIdentification(Method method, Class<?> targetClass) {
@@ -179,6 +208,8 @@ public abstract class CacheAspectSupport implements InitializingBean {
 	protected Object execute(Invoker invoker, Object target, Method method, Object[] args) {
 		// check whether aspect is enabled
 		// to cope with cases where the AJ is pulled in automatically
+		
+		// 检查是否启用了方面以应对自动插入AJ的情况
 		if (!this.initialized) {
 			return invoker.invoke();
 		}
@@ -191,6 +222,7 @@ public abstract class CacheAspectSupport implements InitializingBean {
 		Collection<CacheOperation> cacheOp = getCacheOperationSource().getCacheOperations(method, targetClass);
 
 		// analyze caching information
+		// 分析缓存信息
 		if (!CollectionUtils.isEmpty(cacheOp)) {
 			Map<String, Collection<CacheOperationContext>> ops = createOperationContext(cacheOp, method, args, target, targetClass);
 			// start with evictions
@@ -308,6 +340,7 @@ public abstract class CacheAspectSupport implements InitializingBean {
 			}
 
 			// return a status only if at least one cacheable matched
+			// 仅当至少一个可缓存的匹配项返回状态
 			if (atLeastOnePassed) {
 				return new CacheStatus(cacheUpdates, !cacheHit, retVal);
 			}
@@ -440,7 +473,12 @@ public abstract class CacheAspectSupport implements InitializingBean {
 
 		/**
 		 * Computes the key for the given caching operation.
+		 * 
+		 * <p> 计算给定缓存操作的密钥。
+		 * 
 		 * @return generated key (null if none can be generated)
+		 * 
+		 * <p> 生成的密钥（如果无法生成，则为null）
 		 */
 		protected Object generateKey() {
 			if (StringUtils.hasText(this.operation.getKey())) {

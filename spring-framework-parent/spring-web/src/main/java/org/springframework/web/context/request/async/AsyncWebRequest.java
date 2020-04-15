@@ -43,6 +43,8 @@ public interface AsyncWebRequest extends NativeWebRequest {
 
 	/**
 	 * Add a handle to invoke when request processing completes.
+	 * 
+	 * <p> 添加句柄以在请求处理完成时调用。
 	 */
 	void addCompletionHandler(Runnable runnable);
 

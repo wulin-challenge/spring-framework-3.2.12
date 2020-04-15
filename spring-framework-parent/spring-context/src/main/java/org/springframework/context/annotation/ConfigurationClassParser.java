@@ -66,13 +66,21 @@ import org.springframework.util.StringUtils;
  * {@link ConfigurationClass} objects (parsing a single Configuration class may result in
  * any number of ConfigurationClass objects because one Configuration class may import
  * another using the {@link Import} annotation).
+ * 
+ * <p> 解析Configuration类定义，填充ConfigurationClass对象的集合（解析一个Configuration类可能会导致任意数量的
+ * ConfigurationClass对象，因为一个Configuration类可能会使用Import批注导入另一个ConfigurationClass对象）。
+ * 
  *
  * <p>This class helps separate the concern of parsing the structure of a Configuration
  * class from the concern of registering BeanDefinition objects based on the
  * content of that model.
+ * 
+ * <p> 此类有助于将解析Configuration类的结构的关注与基于该模型的内容注册BeanDefinition对象的关注分开。
  *
  * <p>This ASM-based implementation avoids reflection and eager class loading in order to
  * interoperate effectively with lazy class loading in a Spring ApplicationContext.
+ * 
+ * <p> 这种基于ASM的实现避免了反射和渴望的类加载，以便与Spring ApplicationContext中的惰性类加载有效地互操作。
  *
  * @author Chris Beams
  * @author Juergen Hoeller
@@ -107,6 +115,8 @@ class ConfigurationClassParser {
 	/**
 	 * Create a new {@link ConfigurationClassParser} instance that will be used
 	 * to populate the set of configuration classes.
+	 * 
+	 * <p> 创建一个新的ConfigurationClassParser实例，该实例将用于填充配置类集。
 	 */
 	public ConfigurationClassParser(MetadataReaderFactory metadataReaderFactory,
 			ProblemReporter problemReporter, Environment environment, ResourceLoader resourceLoader,
@@ -124,9 +134,17 @@ class ConfigurationClassParser {
 
 	/**
 	 * Parse the specified {@link Configuration @Configuration} class.
+	 * 
+	 * <p> 解析指定的@Configuration类。
+	 * 
 	 * @param className the name of the class to parse
+	 * 
+	 * <p> 要解析的类的名称
+	 * 
 	 * @param beanName may be null, but if populated represents the bean id
 	 * (assumes that this configuration class was configured via XML)
+	 * 
+	 * <p> 可以为null，但是如果填充代表bean id（假设此配置类是通过XML配置的）
 	 */
 	public void parse(String className, String beanName) throws IOException {
 		MetadataReader reader = this.metadataReaderFactory.getMetadataReader(className);
@@ -154,6 +172,8 @@ class ConfigurationClassParser {
 		if (this.configurationClasses.contains(configClass) && configClass.getBeanName() != null) {
 			// Explicit bean definition found, probably replacing an import.
 			// Let's remove the old one and go with the new one.
+			
+			// 找到明确的bean定义，可能替换了导入。 让我们删除旧的，然后使用新的。
 			this.configurationClasses.remove(configClass);
 			for (Iterator<ConfigurationClass> it = this.knownSuperclasses.values().iterator(); it.hasNext();) {
 				if (configClass.equals(it.next())) {
@@ -163,6 +183,7 @@ class ConfigurationClassParser {
 		}
 
 		// Recursively process the configuration class and its superclass hierarchy.
+		// 递归处理配置类及其超类层次结构。
 		do {
 			metadata = doProcessConfigurationClass(configClass, metadata);
 		}
@@ -173,12 +194,16 @@ class ConfigurationClassParser {
 
 	/**
 	 * @return annotation metadata of superclass, {@code null} if none found or previously processed
+	 * 
+	 * <p> 超类的注释元数据，如果未找到或先前未处理，则为null
 	 */
 	protected AnnotationMetadata doProcessConfigurationClass(ConfigurationClass configClass, AnnotationMetadata metadata) throws IOException {
 		// Recursively process any member (nested) classes first
+		// 首先递归处理任何成员（嵌套）类
 		processMemberClasses(metadata);
 
 		// Process any @PropertySource annotations
+		// 处理任何@PropertySource批注
 		AnnotationAttributes propertySource = MetadataUtils.attributesFor(metadata,
 				org.springframework.context.annotation.PropertySource.class);
 		if (propertySource != null) {
@@ -186,13 +211,16 @@ class ConfigurationClassParser {
 		}
 
 		// Process any @ComponentScan annotations
+		// 处理任何@ComponentScan批注
 		AnnotationAttributes componentScan = MetadataUtils.attributesFor(metadata, ComponentScan.class);
 		if (componentScan != null) {
 			// The config class is annotated with @ComponentScan -> perform the scan immediately
+			// 使用@ComponentScan注释配置类->立即执行扫描
 			Set<BeanDefinitionHolder> scannedBeanDefinitions =
 					this.componentScanParser.parse(componentScan, metadata.getClassName());
 
 			// Check the set of scanned definitions for any further config classes and parse recursively if necessary
+			// 检查扫描的定义集是否有其他配置类，并在必要时递归解析
 			for (BeanDefinitionHolder holder : scannedBeanDefinitions) {
 				if (ConfigurationClassUtils.checkConfigurationClassCandidate(holder.getBeanDefinition(), this.metadataReaderFactory)) {
 					this.parse(holder.getBeanDefinition().getBeanClassName(), holder.getBeanName());
@@ -201,6 +229,7 @@ class ConfigurationClassParser {
 		}
 
 		// Process any @Import annotations
+		// 处理任何@Import批注
 		Set<Object> imports = new LinkedHashSet<Object>();
 		Set<Object> visited = new LinkedHashSet<Object>();
 		collectImports(metadata, imports, visited);
@@ -209,6 +238,7 @@ class ConfigurationClassParser {
 		}
 
 		// Process any @ImportResource annotations
+		// 处理任何@ImportResource批注
 		if (metadata.isAnnotated(ImportResource.class.getName())) {
 			AnnotationAttributes importResource = MetadataUtils.attributesFor(metadata, ImportResource.class);
 			String[] resources = importResource.getStringArray("value");
@@ -220,17 +250,20 @@ class ConfigurationClassParser {
 		}
 
 		// Process individual @Bean methods
+		// 处理单个@Bean方法
 		Set<MethodMetadata> beanMethods = metadata.getAnnotatedMethods(Bean.class.getName());
 		for (MethodMetadata methodMetadata : beanMethods) {
 			configClass.addBeanMethod(new BeanMethod(methodMetadata, configClass));
 		}
 
 		// Process superclass, if any
+		// 处理超类（如果有）
 		if (metadata.hasSuperClass()) {
 			String superclass = metadata.getSuperClassName();
 			if (!superclass.startsWith("java") && !this.knownSuperclasses.containsKey(superclass)) {
 				this.knownSuperclasses.put(superclass, configClass);
 				// superclass found, return its annotation metadata and recurse
+				// 找到超类，返回其注释元数据并递归
 				if (metadata instanceof StandardAnnotationMetadata) {
 					Class<?> clazz = ((StandardAnnotationMetadata) metadata).getIntrospectedClass();
 					return new StandardAnnotationMetadata(clazz.getSuperclass(), true);
@@ -243,13 +276,22 @@ class ConfigurationClassParser {
 		}
 
 		// No superclass -> processing is complete
+		// 没有超类->处理完成
 		return null;
 	}
 
 	/**
 	 * Register member (nested) classes that happen to be configuration classes themselves.
+	 * 
+	 * <p> 注册碰巧是配置类本身的成员（嵌套）类。
+	 * 
 	 * @param metadata the metadata representation of the containing class
+	 * 
+	 * <p> 包含类的元数据表示
+	 * 
 	 * @throws IOException if there is any problem reading metadata from a member class
+	 * 
+	 * <p> 从成员类读取元数据是否有问题
 	 */
 	private void processMemberClasses(AnnotationMetadata metadata) throws IOException {
 		if (metadata instanceof StandardAnnotationMetadata) {
@@ -492,6 +534,9 @@ class ConfigurationClassParser {
 		 * Simplified contains() implementation that tests to see if any {@link ConfigurationClass}
 		 * exists within this stack that has the same name as <var>elem</var>. Elem must be of
 		 * type ConfigurationClass.
+		 * 
+		 * <p> 简化的contains（）实现，测试该实现以查看此堆栈中是否存在与elem同名的ConfigurationClass。 
+		 * Elem必须为ConfigurationClass类型。
 		 */
 		@Override
 		public boolean contains(Object elem) {
