@@ -26,11 +26,17 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
  * {@link org.springframework.web.servlet.DispatcherServlet DispatcherServlet}
  * configured with annotated classes, e.g. Spring's
  * {@link org.springframework.context.annotation.Configuration @Configuration} classes.
+ * 
+ * <p> org.springframework.web.WebApplicationInitializer实现的基类，该实现注册使用注释类配置的
+ * DispatcherServlet，例如 Spring的@Configuration类。
  *
  * <p>Concrete implementations are required to implement {@link #getRootConfigClasses()}
  * and {@link #getServletConfigClasses()} as well as {@link #getServletMappings()}.
  * Further template and customization methods are provided by
  * {@link AbstractDispatcherServletInitializer}.
+ * 
+ * <p> 需要具体的实现才能实现getRootConfigClasses（）和getServletConfigClasses（）以及getServletMappings（）。
+ *  AbstractDispatcherServletInitializer提供了其他模板和自定义方法。
  *
  * @author Arjen Poutsma
  * @author Chris Beams
@@ -44,6 +50,9 @@ public abstract class AbstractAnnotationConfigDispatcherServletInitializer
 	 * <p>This implementation creates an {@link AnnotationConfigWebApplicationContext},
 	 * providing it the annotated classes returned by {@link #getRootConfigClasses()}.
 	 * Returns {@code null} if {@link #getRootConfigClasses()} returns {@code null}.
+	 * 
+	 * <p> 此实现创建一个AnnotationConfigWebApplicationContext，为它提供
+	 * getRootConfigClasses（）返回的带注释的类。 如果getRootConfigClasses（）返回null，则返回null。
 	 */
 	@Override
 	protected WebApplicationContext createRootApplicationContext() {
@@ -77,8 +86,13 @@ public abstract class AbstractAnnotationConfigDispatcherServletInitializer
 	 * Specify {@link org.springframework.context.annotation.Configuration @Configuration}
 	 * and/or {@link org.springframework.stereotype.Component @Component} classes to be
 	 * provided to the {@linkplain #createRootApplicationContext() root application context}.
+	 * 
+	 * <p> 指定@Configuration和/或@Component类提供给根应用程序上下文。
+	 * 
 	 * @return the configuration classes for the root application context, or {@code null}
 	 * if creation and registration of a root context is not desired
+	 * 
+	 * <p> 根应用程序上下文的配置类；如果不需要创建和注册根上下文，则为null
 	 */
 	protected abstract Class<?>[] getRootConfigClasses();
 
@@ -87,8 +101,13 @@ public abstract class AbstractAnnotationConfigDispatcherServletInitializer
 	 * and/or {@link org.springframework.stereotype.Component @Component} classes to be
 	 * provided to the {@linkplain #createServletApplicationContext() dispatcher servlet
 	 * application context}.
+	 * 
+	 * <p> 指定要提供给调度程序Servlet应用程序上下文的@Configuration和/或@Component类。
+	 * 
 	 * @return the configuration classes for the dispatcher servlet application context
 	 * (may not be empty or {@code null})
+	 * 
+	 * <p> 调度程序Servlet应用程序上下文的配置类（不能为空或null）
 	 */
 	protected abstract Class<?>[] getServletConfigClasses();
 
