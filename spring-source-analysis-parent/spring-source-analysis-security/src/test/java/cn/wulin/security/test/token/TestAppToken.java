@@ -25,12 +25,12 @@ public class TestAppToken {
 	
 	@Test
 	public void getRoleUserTest() {
-//		String token = getToken();
+		String token = getToken();
 		
 		Map<String,String> headers = new HashMap<String,String>();
 		headers.put("request_type", "token");
-//		headers.put("token", token);
-		headers.put("token", "5f4bf159-53e9-48db-8d91-b0331a7333641");
+		headers.put("token", token);
+//		headers.put("token", "5f4bf159-53e9-48db-8d91-b0331a7333641");
 		
 		String post = HttpClientUtil.post(TOKEN_ROLEUSER_URL, null, headers);
 		System.out.println(post);
